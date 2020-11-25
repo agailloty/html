@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Visualisation des données | Déterminer les facteurs explicatifs du revenu d’un film</title>
+  <meta name="description" content="5 Visualisation des données | Déterminer les facteurs explicatifs du revenu d’un film" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Visualisation des données | Déterminer les facteurs explicatifs du revenu d’un film" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Visualisation des données | Déterminer les facteurs explicatifs du revenu d’un film" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+<meta name="author" content="Najwa Maaden" />
+
+
+<meta name="date" content="2019-09-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="analyse-exploratoire-des-donnees.html"/>
+<link rel="next" href="modelisation.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="presentation-du-projet.html"><a href="presentation-du-projet.html"><i class="fa fa-check"></i><b>1</b> Présentation du projet</a><ul>
+<li class="chapter" data-level="1.1" data-path="presentation-du-projet.html"><a href="presentation-du-projet.html#resultats-globaux"><i class="fa fa-check"></i><b>1.1</b> Résultats globaux</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-propos-des-auteurs.html"><a href="a-propos-des-auteurs.html"><i class="fa fa-check"></i><b>2</b> A propos des auteurs</a></li>
+<li class="chapter" data-level="3" data-path="importation-des-packages.html"><a href="importation-des-packages.html"><i class="fa fa-check"></i><b>3</b> Importation des packages</a></li>
+<li class="chapter" data-level="4" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html"><i class="fa fa-check"></i><b>4</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="4.1" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#qualite-des-donnees"><i class="fa fa-check"></i><b>4.1</b> Qualité des données</a></li>
+<li class="chapter" data-level="4.2" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#traitement-des-donnees-manquantes"><i class="fa fa-check"></i><b>4.2</b> Traitement des données manquantes</a></li>
+<li class="chapter" data-level="4.3" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#imputation-des-valeurs-manquantes"><i class="fa fa-check"></i><b>4.3</b> Imputation des valeurs manquantes</a></li>
+<li class="chapter" data-level="4.4" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>4.4</b> L’Analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html"><i class="fa fa-check"></i><b>5</b> Visualisation des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#visualisation-des-composantes-principales"><i class="fa fa-check"></i><b>5.1</b> Visualisation des composantes principales</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#nuage-de-points"><i class="fa fa-check"></i><b>5.2</b> Nuage de points</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#correlations"><i class="fa fa-check"></i><b>5.3</b> Correlations</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#densite-des-colonnes-et-normalisations"><i class="fa fa-check"></i><b>5.4</b> Densité des colonnes et normalisations</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#colonnes-categoriques"><i class="fa fa-check"></i><b>5.5</b> Colonnes catégoriques</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modelisation.html"><a href="modelisation.html"><i class="fa fa-check"></i><b>6</b> Modélisation</a><ul>
+<li class="chapter" data-level="6.1" data-path="modelisation.html"><a href="modelisation.html#regression-lineaire-simple"><i class="fa fa-check"></i><b>6.1</b> Regression linéaire simple</a></li>
+<li class="chapter" data-level="6.2" data-path="modelisation.html"><a href="modelisation.html#regression-lineaire-multiple"><i class="fa fa-check"></i><b>6.2</b> Régression linéaire multiple</a></li>
+<li class="chapter" data-level="6.3" data-path="modelisation.html"><a href="modelisation.html#regularisation"><i class="fa fa-check"></i><b>6.3</b> Régularisation</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="modelisation.html"><a href="modelisation.html#regression-contrainte-ridge"><i class="fa fa-check"></i><b>6.3.1</b> Régression contrainte Ridge</a></li>
+<li class="chapter" data-level="6.3.2" data-path="modelisation.html"><a href="modelisation.html#regression-contrainte-lasso"><i class="fa fa-check"></i><b>6.3.2</b> Régression contrainte LASSO</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="evaluation-des-modeles.html"><a href="evaluation-des-modeles.html"><i class="fa fa-check"></i><b>7</b> Evaluation des modèles</a></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="9" data-path="note-sur-la-reproductibilite.html"><a href="note-sur-la-reproductibilite.html"><i class="fa fa-check"></i><b>9</b> Note sur la reproductibilité</a></li>
+<li class="chapter" data-level="10" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>10</b> Bibliographie</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Déterminer les facteurs explicatifs du revenu d’un film</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualisation-des-donnees" class="section level1">
+<h1><span class="header-section-number">5</span> Visualisation des données</h1>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">fviz_screeplot</span>(acp)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">fviz_pca_var</span>(acp, <span class="dt">repel =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<div id="visualisation-des-composantes-principales" class="section level2">
+<h2><span class="header-section-number">5.1</span> Visualisation des composantes principales</h2>
+</div>
+<div id="nuage-de-points" class="section level2">
+<h2><span class="header-section-number">5.2</span> Nuage de points</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">ready_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> budget, <span class="dt">y =</span> revenue)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot; Relation entre le budget dépensé et le revenu&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>Lien entre la popularité et le budget</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">ready_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> budget, <span class="dt">y =</span> popularity)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot; Relation entre le budget dépensé et la popularité du film&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>Lien entre la popularité et le revenu du film</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">ready_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> revenue, <span class="dt">y =</span> popularity)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot; Relation entre le revenu et la popularité du film&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+</div>
+<div id="correlations" class="section level2">
+<h2><span class="header-section-number">5.3</span> Correlations</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">ggcorrplot<span class="op">::</span><span class="kw">ggcorrplot</span>(</a>
+<a class="sourceLine" id="cb22-2" title="2">  <span class="kw">cor</span>(ready_df), <span class="dt">colors =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;white&quot;</span>, <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb22-3" title="3">                            <span class="dt">hc.order =</span> <span class="ot">TRUE</span>, <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>)</a>
+<a class="sourceLine" id="cb22-4" title="4">)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="1152" /></p>
+</div>
+<div id="densite-des-colonnes-et-normalisations" class="section level2">
+<h2><span class="header-section-number">5.4</span> Densité des colonnes et normalisations</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">ready_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="st">  </span><span class="kw">select</span>(revenue, budget, popularity, vote_average) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="st">&quot;corr&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>( <span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="1344" /></p>
+<p>A l’exception de la colonne <code>vote_average</code>, toutes les autres colonnes sont loin de suivre une distribution normale.</p>
+<p>Il y a évidemment dans ces colonnes des valeurs atypiques (outliers). Représentons à l’aide des boîtes à moustaches ces colonnes</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">ready_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="st">  </span><span class="kw">select</span>(revenue, budget, popularity, vote_average) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="st">&quot;corr&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb24-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> value, <span class="dt">x =</span> <span class="st">&quot;Distribution&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb24-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="1152" /></p>
+<p>L’intuition que nous avions eu sur les valeurs atypiques s’avèrent à la vue de ces colonnes. Mettons dans un tableau l’ensemble des indicateurs de moments pour chacune de ces colonnes afin d’observer là il y a anomalie dans la distribution des données.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Indicateurs de tendance centrale du revenu&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;Indicateurs de tendance centrale du revenu&quot;</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">quantile</span>(ready_df<span class="op">$</span>revenue)</a></code></pre></div>
+<pre><code>##         0%        25%        50%        75%       100% 
+##          0          0          0   24000000 2781505847</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Indicateurs de tendance centrale du budget&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;Indicateurs de tendance centrale du budget&quot;</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">quantile</span>(ready_df<span class="op">$</span>budget)</a></code></pre></div>
+<pre><code>##       0%      25%      50%      75%     100% 
+## 0.00e+00 0.00e+00 0.00e+00 1.50e+07 4.25e+08</code></pre>
+<p>Il semble bien qu’il y ait un problème avec les données car le minimum des revenus est 0, cela ne peut se faire</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">ready_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span><span class="kw">select</span>(revenue, budget, popularity, vote_average) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="st">&quot;corr&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb33-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="1344" /></p>
+<p>Il serait intéressant de normaliser chacune de ces colonnes pour les rapprocher d’une distribution normale. Si nous essayons d’estimer le revenu du film à partir de ces colonnes numériques avec une régression linéaire OLS, nous risquons de construire un modèle biaisé avec cette configuration.</p>
+<p>Il existe une transformation qui porte le nom de ces auteurs Yeo et Johnson qui consiste à rapprocher vers une distribution normale des colonnes qui ne le sont pas. Nous allons essayer cette trasnformation pour voir si nous pouvons améliorer la qualité d’un modèle.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">(blueprint &lt;-<span class="st"> </span><span class="kw">recipe</span>(revenue<span class="op">~</span>., <span class="dt">data =</span> ready_df) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="st">  </span><span class="kw">step_YeoJohnson</span>(<span class="kw">all_predictors</span>(), budget, vote_average, popularity, revenue))</a></code></pre></div>
+<pre><code>## Data Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##    outcome          1
+##  predictor         40
+## 
+## Operations:
+## 
+## Yeo-Johnson transformation on all_predictors(), ...</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">blueprint &lt;-<span class="st"> </span><span class="kw">prep</span>(blueprint)</a>
+<a class="sourceLine" id="cb36-2" title="2">new_df &lt;-<span class="st"> </span>blueprint<span class="op">$</span>template</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">new_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="st">  </span><span class="kw">select</span>(revenue, budget, popularity, vote_average) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="st">&quot;corr&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb37-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="1344" /></p>
+</div>
+<div id="colonnes-categoriques" class="section level2">
+<h2><span class="header-section-number">5.5</span> Colonnes catégoriques</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">ready_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="st">  </span><span class="kw">select</span>(Action<span class="op">:</span>septembre) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-3" title="3"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="op">~</span><span class="kw">as.factor</span>(.)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="st">&quot;categorical&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-5" title="5"><span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="3072" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analyse-exploratoire-des-donnees.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modelisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

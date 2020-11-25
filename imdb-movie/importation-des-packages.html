@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Importation des packages | Déterminer les facteurs explicatifs du revenu d’un film</title>
+  <meta name="description" content="3 Importation des packages | Déterminer les facteurs explicatifs du revenu d’un film" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Importation des packages | Déterminer les facteurs explicatifs du revenu d’un film" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Importation des packages | Déterminer les facteurs explicatifs du revenu d’un film" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+<meta name="author" content="Najwa Maaden" />
+
+
+<meta name="date" content="2019-09-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="a-propos-des-auteurs.html"/>
+<link rel="next" href="analyse-exploratoire-des-donnees.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="presentation-du-projet.html"><a href="presentation-du-projet.html"><i class="fa fa-check"></i><b>1</b> Présentation du projet</a><ul>
+<li class="chapter" data-level="1.1" data-path="presentation-du-projet.html"><a href="presentation-du-projet.html#resultats-globaux"><i class="fa fa-check"></i><b>1.1</b> Résultats globaux</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-propos-des-auteurs.html"><a href="a-propos-des-auteurs.html"><i class="fa fa-check"></i><b>2</b> A propos des auteurs</a></li>
+<li class="chapter" data-level="3" data-path="importation-des-packages.html"><a href="importation-des-packages.html"><i class="fa fa-check"></i><b>3</b> Importation des packages</a></li>
+<li class="chapter" data-level="4" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html"><i class="fa fa-check"></i><b>4</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="4.1" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#qualite-des-donnees"><i class="fa fa-check"></i><b>4.1</b> Qualité des données</a></li>
+<li class="chapter" data-level="4.2" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#traitement-des-donnees-manquantes"><i class="fa fa-check"></i><b>4.2</b> Traitement des données manquantes</a></li>
+<li class="chapter" data-level="4.3" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#imputation-des-valeurs-manquantes"><i class="fa fa-check"></i><b>4.3</b> Imputation des valeurs manquantes</a></li>
+<li class="chapter" data-level="4.4" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>4.4</b> L’Analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html"><i class="fa fa-check"></i><b>5</b> Visualisation des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#visualisation-des-composantes-principales"><i class="fa fa-check"></i><b>5.1</b> Visualisation des composantes principales</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#nuage-de-points"><i class="fa fa-check"></i><b>5.2</b> Nuage de points</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#correlations"><i class="fa fa-check"></i><b>5.3</b> Correlations</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#densite-des-colonnes-et-normalisations"><i class="fa fa-check"></i><b>5.4</b> Densité des colonnes et normalisations</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#colonnes-categoriques"><i class="fa fa-check"></i><b>5.5</b> Colonnes catégoriques</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modelisation.html"><a href="modelisation.html"><i class="fa fa-check"></i><b>6</b> Modélisation</a><ul>
+<li class="chapter" data-level="6.1" data-path="modelisation.html"><a href="modelisation.html#regression-lineaire-simple"><i class="fa fa-check"></i><b>6.1</b> Regression linéaire simple</a></li>
+<li class="chapter" data-level="6.2" data-path="modelisation.html"><a href="modelisation.html#regression-lineaire-multiple"><i class="fa fa-check"></i><b>6.2</b> Régression linéaire multiple</a></li>
+<li class="chapter" data-level="6.3" data-path="modelisation.html"><a href="modelisation.html#regularisation"><i class="fa fa-check"></i><b>6.3</b> Régularisation</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="modelisation.html"><a href="modelisation.html#regression-contrainte-ridge"><i class="fa fa-check"></i><b>6.3.1</b> Régression contrainte Ridge</a></li>
+<li class="chapter" data-level="6.3.2" data-path="modelisation.html"><a href="modelisation.html#regression-contrainte-lasso"><i class="fa fa-check"></i><b>6.3.2</b> Régression contrainte LASSO</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="evaluation-des-modeles.html"><a href="evaluation-des-modeles.html"><i class="fa fa-check"></i><b>7</b> Evaluation des modèles</a></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="9" data-path="note-sur-la-reproductibilite.html"><a href="note-sur-la-reproductibilite.html"><i class="fa fa-check"></i><b>9</b> Note sur la reproductibilité</a></li>
+<li class="chapter" data-level="10" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>10</b> Bibliographie</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Déterminer les facteurs explicatifs du revenu d’un film</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="importation-des-packages" class="section level1">
+<h1><span class="header-section-number">3</span> Importation des packages</h1>
+<p>Pour ce travail nous travaillerons avec le langage de programmation R. Le langage R est extrêmement puissant pour l’analyse des données et la modélisation statique. Il a été pensé pour “programmer avec des donnée”, aujourd’hui ce langage est utilisé par une grande partie des professionnels en Data science.</p>
+<p>Un des grands avanatages du langage R est sa grande communauté qui chaque jour publie de nouveaux packages (code réutilisable) s’adréssant à toute sorte de besoin dans l’analyse des données.</p>
+<p>Nous présentons ici les packages que nous utiliserons dans ce travail.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(recipes)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(FactoMineR)</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">library</span>(factoextra)</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co"># Reading the dataset</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8">df &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;../data/tmdb-movies.csv&quot;</span>)</a></code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="a-propos-des-auteurs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analyse-exploratoire-des-donnees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

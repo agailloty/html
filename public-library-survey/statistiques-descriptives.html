@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Statistiques descriptives | Projet Data Mining</title>
+  <meta name="description" content="3 Statistiques descriptives | Projet Data Mining" />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Statistiques descriptives | Projet Data Mining" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Statistiques descriptives | Projet Data Mining" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="les-données.html"/>
+<link rel="next" href="analyse-des-corrélations.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="les-données.html"><a href="les-données.html"><i class="fa fa-check"></i><b>2</b> Les données</a><ul>
+<li class="chapter" data-level="2.1" data-path="les-données.html"><a href="les-données.html#actions-réalisées-pour-nettoyer-les-données"><i class="fa fa-check"></i><b>2.1</b> Actions réalisées pour nettoyer les données</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html"><i class="fa fa-check"></i><b>3</b> Statistiques descriptives</a></li>
+<li class="chapter" data-level="4" data-path="analyse-des-corrélations.html"><a href="analyse-des-corrélations.html"><i class="fa fa-check"></i><b>4</b> Analyse des corrélations</a></li>
+<li class="chapter" data-level="5" data-path="analyse-de-données.html"><a href="analyse-de-données.html"><i class="fa fa-check"></i><b>5</b> Analyse de données</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyse-de-données.html"><a href="analyse-de-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>5.1</b> L’analyse en composantes principales</a></li>
+<li class="chapter" data-level="5.2" data-path="analyse-de-données.html"><a href="analyse-de-données.html#observation-dun-effet-de-taille"><i class="fa fa-check"></i><b>5.2</b> Observation d’un effet de taille</a></li>
+<li class="chapter" data-level="5.3" data-path="analyse-de-données.html"><a href="analyse-de-données.html#correction-de-leffet-de-taille"><i class="fa fa-check"></i><b>5.3</b> Correction de l’effet de taille</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lanalyse-des-correspondances-multiples.html"><a href="lanalyse-des-correspondances-multiples.html"><i class="fa fa-check"></i><b>6</b> L’analyse des correspondances multiples</a><ul>
+<li class="chapter" data-level="6.1" data-path="lanalyse-des-correspondances-multiples.html"><a href="lanalyse-des-correspondances-multiples.html#analyse-graphique"><i class="fa fa-check"></i><b>6.1</b> Analyse graphique</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="lanalyse-des-correspondances-multiples.html"><a href="lanalyse-des-correspondances-multiples.html#premier-plan-factoriel"><i class="fa fa-check"></i><b>6.1.1</b> Premier plan factoriel</a></li>
+<li class="chapter" data-level="6.1.2" data-path="lanalyse-des-correspondances-multiples.html"><a href="lanalyse-des-correspondances-multiples.html#second-plan-factoriel"><i class="fa fa-check"></i><b>6.1.2</b> Second plan factoriel</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="lanalyse-des-correspondances-multiples.html"><a href="lanalyse-des-correspondances-multiples.html#résultats-tabulaires"><i class="fa fa-check"></i><b>6.2</b> Résultats tabulaires</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="lanalyse-des-correspondances-multiples.html"><a href="lanalyse-des-correspondances-multiples.html#variables-quantitatives-supplémentaires"><i class="fa fa-check"></i><b>6.2.1</b> Variables quantitatives supplémentaires</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="classification-ascendante-hiérarchique-cah.html"><a href="classification-ascendante-hiérarchique-cah.html"><i class="fa fa-check"></i><b>7</b> Classification ascendante hiérarchique (CAH)</a><ul>
+<li class="chapter" data-level="7.1" data-path="classification-ascendante-hiérarchique-cah.html"><a href="classification-ascendante-hiérarchique-cah.html#caractéristiques-des-clusters"><i class="fa fa-check"></i><b>7.1</b> Caractéristiques des clusters</a></li>
+<li class="chapter" data-level="7.2" data-path="classification-ascendante-hiérarchique-cah.html"><a href="classification-ascendante-hiérarchique-cah.html#cluster-1"><i class="fa fa-check"></i><b>7.2</b> Cluster 1</a></li>
+<li class="chapter" data-level="7.3" data-path="classification-ascendante-hiérarchique-cah.html"><a href="classification-ascendante-hiérarchique-cah.html#cluster-2"><i class="fa fa-check"></i><b>7.3</b> Cluster 2</a></li>
+<li class="chapter" data-level="7.4" data-path="classification-ascendante-hiérarchique-cah.html"><a href="classification-ascendante-hiérarchique-cah.html#cluster-3"><i class="fa fa-check"></i><b>7.4</b> Cluster 3</a></li>
+<li class="chapter" data-level="7.5" data-path="classification-ascendante-hiérarchique-cah.html"><a href="classification-ascendante-hiérarchique-cah.html#individus-parangons-et-individus-spécifiques"><i class="fa fa-check"></i><b>7.5</b> Individus parangons et individus spécifiques</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="9" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>9</b> Bibliographie</a></li>
+<li class="chapter" data-level="10" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>10</b> Annexes</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Projet Data Mining</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistiques-descriptives" class="section level1">
+<h1><span class="header-section-number">3</span> Statistiques descriptives</h1>
+<p>Les statistiques descriptives nous permettent de comprendre la distribution de nos données. Nous allons présenter les indicateurs de moments et de tendances centrales tels le minimum, la moyenne, l’écart-type, la médiane et le maximum.<br />
+Pour les variables qualitatives, nous affichons le nombre de modalités et la modalité la plus fréquente pour la colonne (mode).</p>
+<table>
+<caption><span id="tab:unnamed-chunk-8">Table 3.1: </span>Statistiques descriptives des colonnes numériques</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Min</th>
+<th align="right">Moyenne</th>
+<th align="right">Ecart_type</th>
+<th align="right">Max</th>
+<th align="right">Médiane</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>print_collection</td>
+<td align="right">0</td>
+<td align="right">9.1e+04</td>
+<td align="right">414998</td>
+<td align="right">2.2e+07</td>
+<td align="right">2.9e+04</td>
+</tr>
+<tr class="even">
+<td>audio_collection</td>
+<td align="right">0</td>
+<td align="right">5.4e+03</td>
+<td align="right">22733</td>
+<td align="right">7.5e+05</td>
+<td align="right">1.1e+03</td>
+</tr>
+<tr class="odd">
+<td>county_population</td>
+<td align="right">262</td>
+<td align="right">3.0e+05</td>
+<td align="right">782641</td>
+<td align="right">1.0e+07</td>
+<td align="right">6.3e+04</td>
+</tr>
+<tr class="even">
+<td>downloadable_audio</td>
+<td align="right">0</td>
+<td align="right">6.1e+03</td>
+<td align="right">12665</td>
+<td align="right">2.6e+05</td>
+<td align="right">2.5e+03</td>
+</tr>
+<tr class="odd">
+<td>physical_video</td>
+<td align="right">0</td>
+<td align="right">7.3e+03</td>
+<td align="right">27651</td>
+<td align="right">8.3e+05</td>
+<td align="right">2.0e+03</td>
+</tr>
+<tr class="even">
+<td>hours_open</td>
+<td align="right">104</td>
+<td align="right">4.3e+03</td>
+<td align="right">9389</td>
+<td align="right">2.2e+05</td>
+<td align="right">2.4e+03</td>
+</tr>
+<tr class="odd">
+<td>print_subscriptions</td>
+<td align="right">0</td>
+<td align="right">1.6e+02</td>
+<td align="right">1136</td>
+<td align="right">7.5e+04</td>
+<td align="right">5.0e+01</td>
+</tr>
+<tr class="even">
+<td>registered_users</td>
+<td align="right">0</td>
+<td align="right">2.1e+04</td>
+<td align="right">86631</td>
+<td align="right">2.9e+06</td>
+<td align="right">4.2e+03</td>
+</tr>
+<tr class="odd">
+<td>interlibrary_loans_provided</td>
+<td align="right">0</td>
+<td align="right">7.5e+03</td>
+<td align="right">26598</td>
+<td align="right">6.0e+05</td>
+<td align="right">3.8e+02</td>
+</tr>
+<tr class="even">
+<td>interlibrary_loans_received</td>
+<td align="right">0</td>
+<td align="right">7.5e+03</td>
+<td align="right">27798</td>
+<td align="right">9.6e+05</td>
+<td align="right">5.1e+02</td>
+</tr>
+<tr class="odd">
+<td>childrens_programs</td>
+<td align="right">0</td>
+<td align="right">3.1e+02</td>
+<td align="right">1003</td>
+<td align="right">2.9e+04</td>
+<td align="right">1.0e+02</td>
+</tr>
+<tr class="even">
+<td>young_adult_programs</td>
+<td align="right">0</td>
+<td align="right">5.4e+01</td>
+<td align="right">280</td>
+<td align="right">1.1e+04</td>
+<td align="right">8.0e+00</td>
+</tr>
+<tr class="odd">
+<td>internet_computer_use</td>
+<td align="right">0</td>
+<td align="right">3.9e+04</td>
+<td align="right">184719</td>
+<td align="right">6.5e+06</td>
+<td align="right">7.1e+03</td>
+</tr>
+<tr class="even">
+<td>ST_state_population</td>
+<td align="right">582658</td>
+<td align="right">1.0e+07</td>
+<td align="right">8969511</td>
+<td align="right">3.8e+07</td>
+<td align="right">6.6e+06</td>
+</tr>
+<tr class="odd">
+<td>wireless_internet_sessions</td>
+<td align="right">0</td>
+<td align="right">2.7e+04</td>
+<td align="right">272179</td>
+<td align="right">1.4e+07</td>
+<td align="right">1.3e+03</td>
+</tr>
+<tr class="even">
+<td>branch_libraries</td>
+<td align="right">0</td>
+<td align="right">9.7e-01</td>
+<td align="right">4</td>
+<td align="right">9.1e+01</td>
+<td align="right">0.0e+00</td>
+</tr>
+<tr class="odd">
+<td>local_government_operating_revenue</td>
+<td align="right">0</td>
+<td align="right">1.2e+06</td>
+<td align="right">5507524</td>
+<td align="right">1.4e+08</td>
+<td align="right">1.7e+05</td>
+</tr>
+<tr class="even">
+<td>local_cooperative_agreements</td>
+<td align="right">0</td>
+<td align="right">9.5e+00</td>
+<td align="right">23</td>
+<td align="right">6.4e+02</td>
+<td align="right">3.0e+00</td>
+</tr>
+<tr class="odd">
+<td>digital_collection</td>
+<td align="right">0</td>
+<td align="right">2.0e+04</td>
+<td align="right">39157</td>
+<td align="right">1.0e+06</td>
+<td align="right">6.1e+03</td>
+</tr>
+<tr class="even">
+<td>mls_librarians</td>
+<td align="right">0</td>
+<td align="right">3.8e+00</td>
+<td align="right">16</td>
+<td align="right">4.9e+02</td>
+<td align="right">5.0e-01</td>
+</tr>
+</tbody>
+</table>
+<p>Ce qu’on peut constater de l’observation de ce tableau est que l’amplitude des colonnes numériques varie grandement. Une chose est importante à noter aussi : l’écart-type de chacune des colonnes est très élevée, cela indique une grande disparité autour de la moyenne des colonnes. A priori nous ne pouvons pas dire si ces colonnes sont normalement distribuées.</p>
+<p>Il existe aussi dans le jeu de données des variables catégorielles. Nous allons afficher les statistiques associées.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-10">Table 3.2: </span>Liste des variables qualitatives</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Modalities</th>
+<th align="left">MostFrequent</th>
+<th align="right">NbFrequent</th>
+<th align="right">Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>library_name</td>
+<td align="right">5583</td>
+<td align="left">ANCHOR POINT PUBLIC LIBRARY</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>administrative_structure</td>
+<td align="right">3</td>
+<td align="left">SO</td>
+<td align="right">4419</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>interlibrary_relationship</td>
+<td align="right">3</td>
+<td align="left">ME</td>
+<td align="right">4020</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>ST_region_code</td>
+<td align="right">8</td>
+<td align="left">st_2</td>
+<td align="right">1306</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>legal_basis</td>
+<td align="right">9</td>
+<td align="left">CI</td>
+<td align="right">2583</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="les-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analyse-des-corrélations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

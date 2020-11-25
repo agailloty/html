@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Install WSL 2 and configure it on Windows 10 | Using Rstudio server on the Windows 10 subsystem for Linux</title>
+  <meta name="description" content="2 Install WSL 2 and configure it on Windows 10 | Using Rstudio server on the Windows 10 subsystem for Linux" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Install WSL 2 and configure it on Windows 10 | Using Rstudio server on the Windows 10 subsystem for Linux" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Install WSL 2 and configure it on Windows 10 | Using Rstudio server on the Windows 10 subsystem for Linux" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="installing-ubuntu.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#goal-of-the-tutorial"><i class="fa fa-check"></i><b>1.1</b> Goal of the tutorial</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html"><i class="fa fa-check"></i><b>2</b> Install WSL 2 and configure it on Windows 10</a><ul>
+<li class="chapter" data-level="2.1" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html#prerequisites"><i class="fa fa-check"></i><b>2.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2.2" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html#activate-wsl-2-and-virtual-machine-platform-using-powershell"><i class="fa fa-check"></i><b>2.2</b> Activate WSL 2 and Virtual Machine Platform using Powershell</a></li>
+<li class="chapter" data-level="2.3" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html#activate-wsl-2-and-the-virtual-platform-via-the-graphical-user-interface"><i class="fa fa-check"></i><b>2.3</b> Activate WSL 2 and the Virtual Platform via the Graphical User Interface</a></li>
+<li class="chapter" data-level="2.4" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html#making-wsl-2-default"><i class="fa fa-check"></i><b>2.4</b> Making WSL 2 default</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installing-ubuntu.html"><a href="installing-ubuntu.html"><i class="fa fa-check"></i><b>3</b> Installing Ubuntu</a><ul>
+<li class="chapter" data-level="3.1" data-path="installing-ubuntu.html"><a href="installing-ubuntu.html#download-ubuntu-from-the-windows-store"><i class="fa fa-check"></i><b>3.1</b> Download Ubuntu from the Windows Store</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="installing-ubuntu.html"><a href="installing-ubuntu.html#case-when-you-previously-have-a-linux-distribution-running-wsl-1"><i class="fa fa-check"></i><b>3.1.1</b> Case when you previously have a Linux distribution running WSL 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="installing-r-and-rstudio-server.html"><a href="installing-r-and-rstudio-server.html"><i class="fa fa-check"></i><b>4</b> Installing R and Rstudio Server</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Using Rstudio server on the Windows 10 subsystem for Linux</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="install-wsl-2-and-configure-it-on-windows-10" class="section level1">
+<h1><span class="header-section-number">2</span> Install WSL 2 and configure it on Windows 10</h1>
+<div id="prerequisites" class="section level2">
+<h2><span class="header-section-number">2.1</span> Prerequisites</h2>
+<p>The only prerequisites of this part is to have a Windows 10 laptop running at least the 2004 version. <strong>You don’t need to have Windows 10 Professional</strong>.<br />
+You can check that by typing <code>winver</code> in the Start menu.</p>
+<p><img src="img/win_version.PNG" /></p>
+<p>If you don’t have the 2004 version you’ll need to upgrade your Windows laptop because the WSL 2 only work on it.</p>
+<p>You can do so with Windows Update : fetch the latest updates and upgrade your computer before you continue.</p>
+<p>From now I will assume that you have the Windows 10 version 2004.</p>
+<p>The WSL 2 is not by default activated on your computer, you need to activate it.</p>
+<p>There are two ways of doing so : the command line way and the GUI way.</p>
+</div>
+<div id="activate-wsl-2-and-virtual-machine-platform-using-powershell" class="section level2">
+<h2><span class="header-section-number">2.2</span> Activate WSL 2 and Virtual Machine Platform using Powershell</h2>
+<p>For the command line approach you need to Open PowerShell as an administrator and type the following commands :</p>
+<pre><code># Enable the WSL2 without reboot 
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart 
+
+# Enable the Virtual Machine Platform 
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+</code></pre>
+</div>
+<div id="activate-wsl-2-and-the-virtual-platform-via-the-graphical-user-interface" class="section level2">
+<h2><span class="header-section-number">2.3</span> Activate WSL 2 and the Virtual Platform via the Graphical User Interface</h2>
+<p>Alternatively to the Powershell approach where you execute the code above, you can activate both WSL 2 and the Virtual Platform using the Graphical User Interface provided by your Windows OS.</p>
+<p>Open the start menu and type <em>"turn on windows features …</em>. You’ll be redirected to a screen similar to this :</p>
+<p><img src="img/enable_wsl_vm_platform.png" alt="Enable Windows Features" />
+Select both Windows Subsystem for Linux &amp; Virtual Machine Platform and click [OK] to validate.<br />
+It may require you to reboot your computer. Make sure you save all your opening works before rebooting your computer.</p>
+</div>
+<div id="making-wsl-2-default" class="section level2">
+<h2><span class="header-section-number">2.4</span> Making WSL 2 default</h2>
+<p>Since WSL 2 is new, it may be the default on your computer. In fact you can still use WSL 1 alongside WSL 2. But is is recommanded to switch to WSL 2 for the lots of benefits enumerated on the <a href="https://docs.microsoft.com/en-us/windows/wsl/compare-versions">Comparing WSL 1 &amp; WSL 2</a> page.</p>
+<p>To do so you just need to open Powershell and execute the following commands :</p>
+<pre><code>wsl --set-default-version 2</code></pre>
+<p>Any ditributions you will install are going to use WSL 2 by default.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="installing-ubuntu.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

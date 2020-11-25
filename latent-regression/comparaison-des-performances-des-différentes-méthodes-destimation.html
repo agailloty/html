@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Comparaison des performances des différentes méthodes d’estimation | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</title>
+  <meta name="description" content="7 Comparaison des performances des différentes méthodes d’estimation | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Comparaison des performances des différentes méthodes d’estimation | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="agailloty/latent-variable-regressions" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Comparaison des performances des différentes méthodes d’estimation | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="régression-sur-les-moindres-carrés-partiels.html"/>
+<link rel="next" href="conclusion.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-générale.html"><a href="introduction-générale.html"><i class="fa fa-check"></i><b>1</b> Introduction générale</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-générale.html"><a href="introduction-générale.html#présentation-des-données"><i class="fa fa-check"></i><b>1.1</b> Présentation des données</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude-et-plan"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude et plan</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html"><i class="fa fa-check"></i><b>2</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-univariées"><i class="fa fa-check"></i><b>2.1</b> Statistiques descriptives univariées</a></li>
+<li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
+<li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html"><i class="fa fa-check"></i><b>3</b> La régression linéaire multiple</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.0.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.0.2" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.0.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="régressions-sur-variables-latentes.html"><a href="régressions-sur-variables-latentes.html"><i class="fa fa-check"></i><b>4</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="4.1" data-path="régressions-sur-variables-latentes.html"><a href="régressions-sur-variables-latentes.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>4.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><i class="fa fa-check"></i><b>5</b> Le principe de la méthode de la régression sur les composantes principales</a><ul>
+<li class="chapter" data-level="5.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#régression-sur-composantes-principales-rcp-ou-pcr"><i class="fa fa-check"></i><b>5.1</b> Régression sur composantes principales (RCP ou PCR)</a></li>
+<li class="chapter" data-level="5.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>5.2</b> Résultats d’estimations avec SAS</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-1"><i class="fa fa-check"></i><b>5.2.1</b> Dimension 1</a></li>
+<li class="chapter" data-level="5.2.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-2"><i class="fa fa-check"></i><b>5.2.2</b> Dimension 2</a></li>
+<li class="chapter" data-level="5.2.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-3"><i class="fa fa-check"></i><b>5.2.3</b> Dimension 3</a></li>
+<li class="chapter" data-level="5.2.4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-4"><i class="fa fa-check"></i><b>5.2.4</b> Dimension 4</a></li>
+<li class="chapter" data-level="5.2.5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-5"><i class="fa fa-check"></i><b>5.2.5</b> Dimension 5</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#limite-de-la-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>5.3</b> Limite de la régression sur les composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html"><i class="fa fa-check"></i><b>6</b> Régression sur les moindres carrés partiels</a><ul>
+<li class="chapter" data-level="6.1" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>6.1</b> Modèle PLSR avec validation croisée</a></li>
+<li class="chapter" data-level="6.2" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>6.2</b> Le nombre de composantes</a></li>
+<li class="chapter" data-level="6.3" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#loadings-chargements-and-weights-poids"><i class="fa fa-check"></i><b>6.3</b> Loadings (chargements) and weights (poids)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>7</b> Comparaison des performances des différentes méthodes d’estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-de-régression-multiple"><i class="fa fa-check"></i><b>7.1</b> Performances prédictives du modèle de régression multiple</a></li>
+<li class="chapter" data-level="7.2" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-de-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>7.2</b> Performances prédictives du modèle de régression sur les composantes principales</a></li>
+<li class="chapter" data-level="7.3" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-sur-les-moindres-carrés-partiels"><i class="fa fa-check"></i><b>7.3</b> Performances prédictives du modèle sur les moindres carrés partiels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="9" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>9</b> Bibliographie</a></li>
+<li class="chapter" data-level="10" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>10</b> Annexes</a><ul>
+<li class="chapter" data-level="10.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>10.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+<li class="chapter" data-level="10.2" data-path="annexes.html"><a href="annexes.html#annexe-2-les-coefficients-estimés-par-le-pls"><i class="fa fa-check"></i><b>10.2</b> Annexe 2: Les coefficients estimés par le PLS</a></li>
+<li class="chapter" data-level="10.3" data-path="annexes.html"><a href="annexes.html#annexe-3-description-des-colonnes"><i class="fa fa-check"></i><b>10.3</b> Annexe 3 : Description des colonnes :</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="comparaison-des-performances-des-différentes-méthodes-destimation" class="section level1">
+<h1><span class="header-section-number">7</span> Comparaison des performances des différentes méthodes d’estimation</h1>
+<div id="performances-prédictives-du-modèle-de-régression-multiple" class="section level2">
+<h2><span class="header-section-number">7.1</span> Performances prédictives du modèle de régression multiple</h2>
+<p>Nous pouvons représenter la qualité de l’ajustement en construisant pour chacun des modèle un nuage de points des valeurs observées et des valeurs prédites.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">pred_mod &lt;-<span class="st"> </span><span class="kw">predict</span>(mod, base_export)</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">y &lt;-<span class="st"> </span>base_export<span class="op">$</span>Sale_Price</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span> (<span class="dt">x =</span> y, <span class="dt">y =</span> pred_mod)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y, <span class="dt">y =</span> y), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb36-7" data-line-number="7"><span class="st">  </span><span class="kw">labs</span>( <span class="dt">title =</span> <span class="st">&quot;Valeurs observées vs. valeurs prédites&quot;</span>,</a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">        <span class="dt">x =</span> <span class="st">&quot;Valeurs observées&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Valeurs observées&quot;</span>, </a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">        <span class="dt">subtitle =</span> <span class="st">&quot;Pour le modèle de régression multiple&quot;</span>)</a></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-33-1.png" width="2400" /></p>
+<p>Nous voyons que le modèle a tendance à sous évaluer la valeur des maisons. En rouge c’est à quoi ressemblerait le nuage de point sur l’ajustement était parfait.<br />
+Le prix de certaines maisons semble être aberrant, c’est le cas pour les maisons de plus de 500.000 dollars.</p>
+<p>Nous pouvons quantifier la différence entre les valeurs prédites et les valeurs observées en calculant la racine carrée des distances aux carrées. C’est le critère du Root Mean Square Error (RMSE).</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">sigma</span>(mod)</a></code></pre></div>
+<pre><code>[1] 35861.907</code></pre>
+<p>Le RMSE pour ce modèle est de 35861, ce qui signifie qu’en moyenne les valeurs prédites dévient de la valeur observée de 35861 dollars en valeur absolue.</p>
+</div>
+<div id="performances-prédictives-du-modèle-de-régression-sur-les-composantes-principales" class="section level2">
+<h2><span class="header-section-number">7.2</span> Performances prédictives du modèle de régression sur les composantes principales</h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">pred_mod &lt;-<span class="st"> </span><span class="kw">predict</span>(mod_pc, coord_pc)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">y &lt;-<span class="st"> </span>base_export<span class="op">$</span>Sale_Price</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span> (<span class="dt">x =</span> y, <span class="dt">y =</span> pred_mod)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb39-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y, <span class="dt">y =</span> y), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb39-7" data-line-number="7"><span class="st">  </span><span class="kw">labs</span>( <span class="dt">title =</span> <span class="st">&quot;Valeurs observées vs. valeurs prédites&quot;</span>,</a>
+<a class="sourceLine" id="cb39-8" data-line-number="8">        <span class="dt">x =</span> <span class="st">&quot;Valeurs observées&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Valeurs observées&quot;</span>, </a>
+<a class="sourceLine" id="cb39-9" data-line-number="9">        <span class="dt">subtitle =</span> <span class="st">&quot;Pour le modèle de régression sur les composantes principales&quot;</span>)</a></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-35-1.png" width="2400" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">sigma</span>(mod_pc)</a></code></pre></div>
+<pre><code>[1] 39223.52</code></pre>
+<p>Le RMSE de ce modèle de régression sur les composantes principales est de 39223, soit 3361 de plus que le modèle de régression multiple.</p>
+</div>
+<div id="performances-prédictives-du-modèle-sur-les-moindres-carrés-partiels" class="section level2">
+<h2><span class="header-section-number">7.3</span> Performances prédictives du modèle sur les moindres carrés partiels</h2>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">pred_mod &lt;-<span class="st"> </span><span class="kw">predict</span>(model.plsr, base_export) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="st">  </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">y &lt;-<span class="st"> </span>base_export<span class="op">$</span>Sale_Price</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb42-5" data-line-number="5"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span> (<span class="dt">x =</span> y, <span class="dt">y =</span> pred_mod[, <span class="dv">5</span>])) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb42-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> y, <span class="dt">y =</span> y), <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb42-8" data-line-number="8"><span class="st">  </span><span class="kw">labs</span>( <span class="dt">title =</span> <span class="st">&quot;Valeurs observées vs. valeurs prédites&quot;</span>,</a>
+<a class="sourceLine" id="cb42-9" data-line-number="9">        <span class="dt">x =</span> <span class="st">&quot;Valeurs observées&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Valeurs observées&quot;</span>, </a>
+<a class="sourceLine" id="cb42-10" data-line-number="10">        <span class="dt">subtitle =</span> <span class="st">&quot;Pour le modèle de régression sur les moindres carrés partiels&quot;</span>)</a></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-37-1.png" width="2400" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">RMSEP</span>(model.plsr)</a></code></pre></div>
+<pre><code>(Intercept)      1 comps      2 comps      3 comps      4 comps      5 comps  
+      79873        76600        47852        44587        43508        42095  </code></pre>
+<p>Les valeurs affichées sont les RMSE pour chaque composante supplémentaire retenue dans le modèle. Pour les 5 composantes que nous avons retenues dans le modèle des moindres carrés partiels, le RMSE est de plus de 42000.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="régression-sur-les-moindres-carrés-partiels.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"font-size": 20,
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

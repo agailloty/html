@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 La régression linéaire multiple | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</title>
+  <meta name="description" content="3 La régression linéaire multiple | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 La régression linéaire multiple | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="agailloty/latent-variable-regressions" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 La régression linéaire multiple | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="analyse-exploratoire-des-données.html"/>
+<link rel="next" href="régressions-sur-variables-latentes.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-générale.html"><a href="introduction-générale.html"><i class="fa fa-check"></i><b>1</b> Introduction générale</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-générale.html"><a href="introduction-générale.html#présentation-des-données"><i class="fa fa-check"></i><b>1.1</b> Présentation des données</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude-et-plan"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude et plan</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html"><i class="fa fa-check"></i><b>2</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-univariées"><i class="fa fa-check"></i><b>2.1</b> Statistiques descriptives univariées</a></li>
+<li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
+<li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html"><i class="fa fa-check"></i><b>3</b> La régression linéaire multiple</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.0.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.0.2" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.0.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="régressions-sur-variables-latentes.html"><a href="régressions-sur-variables-latentes.html"><i class="fa fa-check"></i><b>4</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="4.1" data-path="régressions-sur-variables-latentes.html"><a href="régressions-sur-variables-latentes.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>4.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><i class="fa fa-check"></i><b>5</b> Le principe de la méthode de la régression sur les composantes principales</a><ul>
+<li class="chapter" data-level="5.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#régression-sur-composantes-principales-rcp-ou-pcr"><i class="fa fa-check"></i><b>5.1</b> Régression sur composantes principales (RCP ou PCR)</a></li>
+<li class="chapter" data-level="5.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>5.2</b> Résultats d’estimations avec SAS</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-1"><i class="fa fa-check"></i><b>5.2.1</b> Dimension 1</a></li>
+<li class="chapter" data-level="5.2.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-2"><i class="fa fa-check"></i><b>5.2.2</b> Dimension 2</a></li>
+<li class="chapter" data-level="5.2.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-3"><i class="fa fa-check"></i><b>5.2.3</b> Dimension 3</a></li>
+<li class="chapter" data-level="5.2.4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-4"><i class="fa fa-check"></i><b>5.2.4</b> Dimension 4</a></li>
+<li class="chapter" data-level="5.2.5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-5"><i class="fa fa-check"></i><b>5.2.5</b> Dimension 5</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#limite-de-la-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>5.3</b> Limite de la régression sur les composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html"><i class="fa fa-check"></i><b>6</b> Régression sur les moindres carrés partiels</a><ul>
+<li class="chapter" data-level="6.1" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>6.1</b> Modèle PLSR avec validation croisée</a></li>
+<li class="chapter" data-level="6.2" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>6.2</b> Le nombre de composantes</a></li>
+<li class="chapter" data-level="6.3" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#loadings-chargements-and-weights-poids"><i class="fa fa-check"></i><b>6.3</b> Loadings (chargements) and weights (poids)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>7</b> Comparaison des performances des différentes méthodes d’estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-de-régression-multiple"><i class="fa fa-check"></i><b>7.1</b> Performances prédictives du modèle de régression multiple</a></li>
+<li class="chapter" data-level="7.2" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-de-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>7.2</b> Performances prédictives du modèle de régression sur les composantes principales</a></li>
+<li class="chapter" data-level="7.3" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-sur-les-moindres-carrés-partiels"><i class="fa fa-check"></i><b>7.3</b> Performances prédictives du modèle sur les moindres carrés partiels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="9" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>9</b> Bibliographie</a></li>
+<li class="chapter" data-level="10" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>10</b> Annexes</a><ul>
+<li class="chapter" data-level="10.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>10.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+<li class="chapter" data-level="10.2" data-path="annexes.html"><a href="annexes.html#annexe-2-les-coefficients-estimés-par-le-pls"><i class="fa fa-check"></i><b>10.2</b> Annexe 2: Les coefficients estimés par le PLS</a></li>
+<li class="chapter" data-level="10.3" data-path="annexes.html"><a href="annexes.html#annexe-3-description-des-colonnes"><i class="fa fa-check"></i><b>10.3</b> Annexe 3 : Description des colonnes :</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="la-régression-linéaire-multiple" class="section level1">
+<h1><span class="header-section-number">3</span> La régression linéaire multiple</h1>
+<p>Nous voulons construire un modèle expliquant le prix de vente de la maison en fonction des caractéristiques.</p>
+<p>Le modèle se présentera sous forme d’une équation comme celle-ci:
+<span class="math display">\[ SalePrice = \alpha + \beta * X \]</span>
+où <span class="math inline">\(\alpha\)</span> est la constante et <span class="math inline">\(X\)</span> les variables explicatives et <span class="math inline">\(\beta\)</span> les coefficients associés à chacune des variables explicatives.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Sale_Price<span class="op">~</span>., <span class="dt">data =</span> base_export)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">summary</span>(mod)</a></code></pre></div>
+<pre><code>
+Call:
+lm(formula = Sale_Price ~ ., data = base_export)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-611577  -18168   -1914   15215  291823 
+
+Coefficients: (1 not defined because of singularities)
+                         Estimate     Std. Error t value  Pr(&gt;|t|)    
+(Intercept)         173248.379363 1034265.831414  0.1675 0.8669816    
+Lot_Frontage            87.803069      21.071267  4.1670 3.177e-05 ***
+Lot_Area                 0.276464       0.092621  2.9849 0.0028603 ** 
+Year_Built             366.052233      40.899707  8.9500 &lt; 2.2e-16 ***
+Year_Remod_Add         520.804027      43.831432 11.8820 &lt; 2.2e-16 ***
+Mas_Vnr_Area            39.274696       4.390740  8.9449 &lt; 2.2e-16 ***
+BsmtFin_SF_1           120.551239     399.798684  0.3015 0.7630321    
+BsmtFin_SF_2           -11.081489       4.231329 -2.6189 0.0088670 ** 
+Bsmt_Unf_SF            -12.311265       2.668471 -4.6136 4.129e-06 ***
+Total_Bsmt_SF           37.970421       3.310015 11.4714 &lt; 2.2e-16 ***
+First_Flr_SF            61.330334       4.008845 15.2988 &lt; 2.2e-16 ***
+Second_Flr_SF           60.450368       3.540552 17.0737 &lt; 2.2e-16 ***
+Low_Qual_Fin_SF         12.832757      14.791305  0.8676 0.3856919    
+Gr_Liv_Area                    NA             NA      NA        NA    
+Bsmt_Full_Bath        6293.288284    1856.188624  3.3904 0.0007072 ***
+Bsmt_Half_Bath       -1858.613118    2914.083872 -0.6378 0.5236520    
+Full_Bath             1920.740936    1998.496886  0.9611 0.3365858    
+Half_Bath            -2438.265685    1935.228354 -1.2599 0.2077936    
+Bedroom_AbvGr        -9685.349040    1216.270979 -7.9632 2.387e-15 ***
+Kitchen_AbvGr       -34847.281701    3621.088385 -9.6234 &lt; 2.2e-16 ***
+TotRms_AbvGrd         4500.668956     881.131470  5.1078 3.470e-07 ***
+Fireplaces            7560.968660    1265.264411  5.9758 2.569e-09 ***
+Garage_Cars           8144.488352    2093.470742  3.8904 0.0001023 ***
+Garage_Area             20.914087       7.215244  2.8986 0.0037765 ** 
+Wood_Deck_SF            23.006374       5.795860  3.9694 7.379e-05 ***
+Open_Porch_SF           -6.849731      10.854623 -0.6310 0.5280624    
+Enclosed_Porch          27.890298      11.454418  2.4349 0.0149561 *  
+Three_season_porch      10.081139      26.568812  0.3794 0.7043926    
+Screen_Porch            62.867980      12.296415  5.1127 3.382e-07 ***
+Pool_Area              -67.534786      19.396372 -3.4818 0.0005054 ***
+Misc_Val                -9.683926       1.196666 -8.0924 8.517e-16 ***
+Mo_Sold                 87.976438     249.179130  0.3531 0.7240654    
+Year_Sold             -941.543008     514.104536 -1.8314 0.0671401 .  
+Overall_Qual          4832.147729    1133.167888  4.2643 2.070e-05 ***
+Overall_Cond         -2726.736579    1385.223170 -1.9684 0.0491120 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 35862 on 2896 degrees of freedom
+Multiple R-squared:  0.80075,   Adjusted R-squared:  0.79848 
+F-statistic: 352.68 on 33 and 2896 DF,  p-value: &lt; 2.22e-16</code></pre>
+<p>La significativité globale de ce modèle de régression multiple est très bonne comme l’indique le test de Fisher. Le modèle explique 80% de la variance des prix de vente, ce qui est très bien pour des données transversales. La grande majorité des variables que nous avions sélectionnées pour inclure dans le modèle se sont montrés significatifs. Le test de Student effectué sur chacun des coefficients montre les différents degrés de significativités des coefficients.</p>
+<p>A cause de multicolinéarité, la variable <code>Gr_Liv_Area</code> qui représente la surface habitable hors étage de la maison a été enlevée du modèle.</p>
+<p>Les variables sont toutes en niveau, nous pouvons donc interpréter les coefficients dans l’unité de la variable. Par exemple l’augmentation de la superficie du terrain (<code>Lot_Area</code>) d’un pied carré augmente le prix de la maison de 87.8 dollars, toute chose égale par ailleurs.</p>
+<div id="le-test-dinflation-de-la-variance-vif" class="section level3">
+<h3><span class="header-section-number">3.0.1</span> Le test d’inflation de la variance (VIF)</h3>
+<p>Il n’est pas possible de réaliser le test d’inflation de la variance (<em>Variance Inflation Factor</em>) sur le modèle car le coefficient de la variable <code>Gr_Liv_Area</code> n’a pas été calculé à cause de la multicolinéarité. Pour pouvoir quantifier la multicolinéarité entre les variables, nous devons donc estimer un nouveau modèle dans lequel la variable <code>Gr_Liv_Area</code> est absente.</p>
+<p>Voici donc les résultats du test VIF que trouvons lorsque la variable <code>Gr_Liv_Area</code> est omise.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">library</span>(car)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sale_Price<span class="op">~</span>., <span class="dt">data =</span> <span class="kw">subset</span>(base_export, <span class="dt">select =</span> <span class="op">-</span>Gr_Liv_Area))</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">kable</span>(<span class="kw">sort</span>(<span class="kw">vif</span>(mod2), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>), <span class="dt">col.names =</span> <span class="st">&quot;VIF&quot;</span>,</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">      <span class="dt">caption =</span> <span class="st">&quot;Test d&#39;inflation de la variance (VIF)&quot;</span>)</a></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-18">Table 3.1: </span>Test d’inflation de la variance (VIF)</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">VIF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Garage_Cars</td>
+<td align="right">5.7824481</td>
+</tr>
+<tr class="even">
+<td>First_Flr_SF</td>
+<td align="right">5.6211017</td>
+</tr>
+<tr class="odd">
+<td>Garage_Area</td>
+<td align="right">5.4901912</td>
+</tr>
+<tr class="even">
+<td>Second_Flr_SF</td>
+<td align="right">5.2394381</td>
+</tr>
+<tr class="odd">
+<td>Total_Bsmt_SF</td>
+<td align="right">4.8520670</td>
+</tr>
+<tr class="even">
+<td>TotRms_AbvGrd</td>
+<td align="right">4.3749371</td>
+</tr>
+<tr class="odd">
+<td>Year_Built</td>
+<td align="right">3.4850622</td>
+</tr>
+<tr class="even">
+<td>Bsmt_Unf_SF</td>
+<td align="right">3.1331090</td>
+</tr>
+<tr class="odd">
+<td>Full_Bath</td>
+<td align="right">2.7810995</td>
+</tr>
+<tr class="even">
+<td>Bedroom_AbvGr</td>
+<td align="right">2.3082980</td>
+</tr>
+<tr class="odd">
+<td>Bsmt_Full_Bath</td>
+<td align="right">2.1608346</td>
+</tr>
+<tr class="even">
+<td>Half_Bath</td>
+<td align="right">2.1548278</td>
+</tr>
+<tr class="odd">
+<td>Year_Remod_Add</td>
+<td align="right">1.9039890</td>
+</tr>
+<tr class="even">
+<td>BsmtFin_SF_1</td>
+<td align="right">1.8157567</td>
+</tr>
+<tr class="odd">
+<td>Overall_Cond</td>
+<td align="right">1.5939918</td>
+</tr>
+<tr class="even">
+<td>Fireplaces</td>
+<td align="right">1.5305911</td>
+</tr>
+<tr class="odd">
+<td>Mas_Vnr_Area</td>
+<td align="right">1.4010673</td>
+</tr>
+<tr class="even">
+<td>Kitchen_AbvGr</td>
+<td align="right">1.3685725</td>
+</tr>
+<tr class="odd">
+<td>Enclosed_Porch</td>
+<td align="right">1.2292602</td>
+</tr>
+<tr class="even">
+<td>Open_Porch_SF</td>
+<td align="right">1.2220136</td>
+</tr>
+<tr class="odd">
+<td>Wood_Deck_SF</td>
+<td align="right">1.2215701</td>
+</tr>
+<tr class="even">
+<td>Lot_Area</td>
+<td align="right">1.2131699</td>
+</tr>
+<tr class="odd">
+<td>BsmtFin_SF_2</td>
+<td align="right">1.1665670</td>
+</tr>
+<tr class="even">
+<td>Bsmt_Half_Bath</td>
+<td align="right">1.1625433</td>
+</tr>
+<tr class="odd">
+<td>Overall_Qual</td>
+<td align="right">1.1515654</td>
+</tr>
+<tr class="even">
+<td>Lot_Frontage</td>
+<td align="right">1.1347730</td>
+</tr>
+<tr class="odd">
+<td>Pool_Area</td>
+<td align="right">1.0857374</td>
+</tr>
+<tr class="even">
+<td>Screen_Porch</td>
+<td align="right">1.0832776</td>
+</tr>
+<tr class="odd">
+<td>Low_Qual_Fin_SF</td>
+<td align="right">1.0686235</td>
+</tr>
+<tr class="even">
+<td>Misc_Val</td>
+<td align="right">1.0460663</td>
+</tr>
+<tr class="odd">
+<td>Year_Sold</td>
+<td align="right">1.0434501</td>
+</tr>
+<tr class="even">
+<td>Mo_Sold</td>
+<td align="right">1.0419652</td>
+</tr>
+<tr class="odd">
+<td>Three_season_porch</td>
+<td align="right">1.0161864</td>
+</tr>
+</tbody>
+</table>
+<p>Puisqu’il n’y a aucune valeur VIF supérieure à 10, il est tentant d’affirmer qu’il n’y a pas de multicolinéarité. Car nous avons vu dans l’analyse des corrélations que certaines variables étaient fortement corrélées. Ainsi bien qu’il n’y a pas de relation linéaire exacte entre les variables, il existe des pseudo-colinéarités relativement fortes entre les variables.</p>
+<p>Nous pouvons vérifier les autres hypothèses des OLS pour déduire la colinéarité.</p>
+</div>
+<div id="vérifions-lhypothèse-de-normalité-des-résidus" class="section level3">
+<h3><span class="header-section-number">3.0.2</span> Vérifions l’hypothèse de normalité des résidus</h3>
+<p>Nous pouvons représenter un histogramme de la distribution des résidus du modèle que nous venons d’estimer. L’une des hypothèses importantes des MCO est la normalité des résidus. Nous pouvons visuellement à l’aide de l’histogramme des résidus dire si les résidus suivent une loi normale.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x =</span> mod<span class="op">$</span>residuals) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">70</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Histogramme des résidus&quot;</span>, <span class="dt">x=</span> <span class="st">&quot;Résidus&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">size =</span> <span class="dv">20</span>))</a></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-19-1.png" width="2400" /></p>
+<p>A l’aide de l’histogramme nous observons que la distribution ressemble à une loi normale, mais elle est fortement dirigée vers la droite.<br />
+Nous pouvons faire le test de Shapiro-Wilk pour tester plus formellement la normalité des résidus. L’hypothèse nulle de ce test est que la distribution est normalement distribuée.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">shapiro.test</span>(mod<span class="op">$</span>residuals)</a></code></pre></div>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  mod$residuals
+W = 0.811785, p-value &lt; 2.22e-16</code></pre>
+<p>Ici la p-value est inférieure à 5% donc, nous rejetons cette hypothèse nulle, la distribution ne suit pas une loi normale.</p>
+<p>Dès lors que les résidus ne suivent pas une loi normale, les estimations faites par les OLS sont biaisées. Il importe donc d’utiliser d’autres méthodes d’estimations pour construire le modèle.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analyse-exploratoire-des-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="régressions-sur-variables-latentes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"font-size": 20,
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

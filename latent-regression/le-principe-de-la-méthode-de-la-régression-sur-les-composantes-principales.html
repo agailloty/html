@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Le principe de la méthode de la régression sur les composantes principales | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</title>
+  <meta name="description" content="5 Le principe de la méthode de la régression sur les composantes principales | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Le principe de la méthode de la régression sur les composantes principales | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="agailloty/latent-variable-regressions" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Le principe de la méthode de la régression sur les composantes principales | Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles." />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="régressions-sur-variables-latentes.html"/>
+<link rel="next" href="régression-sur-les-moindres-carrés-partiels.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction-générale.html"><a href="introduction-générale.html"><i class="fa fa-check"></i><b>1</b> Introduction générale</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction-générale.html"><a href="introduction-générale.html#présentation-des-données"><i class="fa fa-check"></i><b>1.1</b> Présentation des données</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-générale.html"><a href="introduction-générale.html#objectifs-de-létude-et-plan"><i class="fa fa-check"></i><b>1.2</b> Objectifs de l’étude et plan</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html"><i class="fa fa-check"></i><b>2</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-univariées"><i class="fa fa-check"></i><b>2.1</b> Statistiques descriptives univariées</a></li>
+<li class="chapter" data-level="2.2" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#statistiques-descriptives-bivariées"><i class="fa fa-check"></i><b>2.2</b> Statistiques descriptives bivariées</a></li>
+<li class="chapter" data-level="2.3" data-path="analyse-exploratoire-des-données.html"><a href="analyse-exploratoire-des-données.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>2.3</b> L’analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html"><i class="fa fa-check"></i><b>3</b> La régression linéaire multiple</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html#le-test-dinflation-de-la-variance-vif"><i class="fa fa-check"></i><b>3.0.1</b> Le test d’inflation de la variance (VIF)</a></li>
+<li class="chapter" data-level="3.0.2" data-path="la-régression-linéaire-multiple.html"><a href="la-régression-linéaire-multiple.html#vérifions-lhypothèse-de-normalité-des-résidus"><i class="fa fa-check"></i><b>3.0.2</b> Vérifions l’hypothèse de normalité des résidus</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="régressions-sur-variables-latentes.html"><a href="régressions-sur-variables-latentes.html"><i class="fa fa-check"></i><b>4</b> Régressions sur variables latentes</a><ul>
+<li class="chapter" data-level="4.1" data-path="régressions-sur-variables-latentes.html"><a href="régressions-sur-variables-latentes.html#pourquoi-faire-une-régression-sur-les-variables-latentes"><i class="fa fa-check"></i><b>4.1</b> Pourquoi faire une régression sur les variables latentes ?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><i class="fa fa-check"></i><b>5</b> Le principe de la méthode de la régression sur les composantes principales</a><ul>
+<li class="chapter" data-level="5.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#régression-sur-composantes-principales-rcp-ou-pcr"><i class="fa fa-check"></i><b>5.1</b> Régression sur composantes principales (RCP ou PCR)</a></li>
+<li class="chapter" data-level="5.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#résultats-destimations-avec-sas"><i class="fa fa-check"></i><b>5.2</b> Résultats d’estimations avec SAS</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-1"><i class="fa fa-check"></i><b>5.2.1</b> Dimension 1</a></li>
+<li class="chapter" data-level="5.2.2" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-2"><i class="fa fa-check"></i><b>5.2.2</b> Dimension 2</a></li>
+<li class="chapter" data-level="5.2.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-3"><i class="fa fa-check"></i><b>5.2.3</b> Dimension 3</a></li>
+<li class="chapter" data-level="5.2.4" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-4"><i class="fa fa-check"></i><b>5.2.4</b> Dimension 4</a></li>
+<li class="chapter" data-level="5.2.5" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#dimension-5"><i class="fa fa-check"></i><b>5.2.5</b> Dimension 5</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html"><a href="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales.html#limite-de-la-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>5.3</b> Limite de la régression sur les composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html"><i class="fa fa-check"></i><b>6</b> Régression sur les moindres carrés partiels</a><ul>
+<li class="chapter" data-level="6.1" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#modèle-plsr-avec-validation-croisée"><i class="fa fa-check"></i><b>6.1</b> Modèle PLSR avec validation croisée</a></li>
+<li class="chapter" data-level="6.2" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#le-nombre-de-composantes"><i class="fa fa-check"></i><b>6.2</b> Le nombre de composantes</a></li>
+<li class="chapter" data-level="6.3" data-path="régression-sur-les-moindres-carrés-partiels.html"><a href="régression-sur-les-moindres-carrés-partiels.html#loadings-chargements-and-weights-poids"><i class="fa fa-check"></i><b>6.3</b> Loadings (chargements) and weights (poids)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html"><i class="fa fa-check"></i><b>7</b> Comparaison des performances des différentes méthodes d’estimation</a><ul>
+<li class="chapter" data-level="7.1" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-de-régression-multiple"><i class="fa fa-check"></i><b>7.1</b> Performances prédictives du modèle de régression multiple</a></li>
+<li class="chapter" data-level="7.2" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-de-régression-sur-les-composantes-principales"><i class="fa fa-check"></i><b>7.2</b> Performances prédictives du modèle de régression sur les composantes principales</a></li>
+<li class="chapter" data-level="7.3" data-path="comparaison-des-performances-des-différentes-méthodes-destimation.html"><a href="comparaison-des-performances-des-différentes-méthodes-destimation.html#performances-prédictives-du-modèle-sur-les-moindres-carrés-partiels"><i class="fa fa-check"></i><b>7.3</b> Performances prédictives du modèle sur les moindres carrés partiels</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="9" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>9</b> Bibliographie</a></li>
+<li class="chapter" data-level="10" data-path="annexes.html"><a href="annexes.html"><i class="fa fa-check"></i><b>10</b> Annexes</a><ul>
+<li class="chapter" data-level="10.1" data-path="annexes.html"><a href="annexes.html#annexe-1-liste-exhaustive-des-colonnes"><i class="fa fa-check"></i><b>10.1</b> Annexe 1 : Liste exhaustive des colonnes</a></li>
+<li class="chapter" data-level="10.2" data-path="annexes.html"><a href="annexes.html#annexe-2-les-coefficients-estimés-par-le-pls"><i class="fa fa-check"></i><b>10.2</b> Annexe 2: Les coefficients estimés par le PLS</a></li>
+<li class="chapter" data-level="10.3" data-path="annexes.html"><a href="annexes.html#annexe-3-description-des-colonnes"><i class="fa fa-check"></i><b>10.3</b> Annexe 3 : Description des colonnes :</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quels sont les facteurs déterminants qui entrent dans la l’évaluation des prix de vente des propriétés résidentielles.</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="le-principe-de-la-méthode-de-la-régression-sur-les-composantes-principales" class="section level1">
+<h1><span class="header-section-number">5</span> Le principe de la méthode de la régression sur les composantes principales</h1>
+<p>Dans le cadre d’une régression multiple, nous cherchons à expliquer l’endogène y à l’aide de variables explicatives X. Nous cherchons donc <span class="math display">\[y = \alpha + \beta . X\]</span></p>
+<p>La régression sur les composantes principales consiste à remplacer la matrice des <span class="math inline">\(X\)</span> (n lignes et m colonnes) par une nouvelle matrice <span class="math inline">\(T\)</span> dérivée de <span class="math inline">\(X\)</span>, de n lignes et k colonnes, avec k très inférieur à m.</p>
+<p>Chaque colonne k doit être une combinaison linéaire des variables d’origine.</p>
+<p><span class="math display">\[T= X.W\]</span></p>
+<p>Avec <span class="math inline">\(W\)</span> la matrice (m,k) des coefficients définissant les combinaisons linéaires, T une matrice dont les colonnes forment des variables « artificielles » obtenues par combinaison linéaire des variables
+d’origine.</p>
+<p>Une régression multiple est ensuite appliquée avec <span class="math inline">\(T\)</span> à la place de <span class="math inline">\(X\)</span> :
+<span class="math display">\[y = c + d.T\]</span></p>
+<p>Il faut donc déterminer <span class="math inline">\(W\)</span> de manière à avoir une matrice de variables explicatives T plus adaptée au calcul de la régression que la matrice X d’origine.</p>
+<p>Deux méthodes pour construire <span class="math inline">\(T\)</span> (et donc <span class="math inline">\(W\)</span>) : RCP et RPLS</p>
+<div id="régression-sur-composantes-principales-rcp-ou-pcr" class="section level2">
+<h2><span class="header-section-number">5.1</span> Régression sur composantes principales (RCP ou PCR)</h2>
+<p>ACP puis régression multiple. L’ACP nécessite des variables quantitatives. A partir des variables <span class="math inline">\(X\)</span> centrées, l’ACP normée donne la matrice T dont les colonnes sont les composantes principales.</p>
+<p>Elles sont orthogonales entre elles (plus de problème de colinéarité). La matrice <span class="math inline">\(W\)</span> est la matrice des coefficients des combinaisons linéaires (coordonnées sur les composantes principales).</p>
+<p>Pour cette méthode, nous allons utiliser conjointement SAS et R afin de ressortir le maximum d’informations utiles à l’interprétation des résultats.</p>
+</div>
+<div id="résultats-destimations-avec-sas" class="section level2">
+<h2><span class="header-section-number">5.2</span> Résultats d’estimations avec SAS</h2>
+<p>Nous avons spécifié la méthode “PCR” dans la procédure PLS afin de réaliser une régression sur les composantes principales. Il y a en total 34 variables explicatives pour 2930 observations.<br />
+Nous choisissons également de faire une validation croisée sur le jeu de données.</p>
+<p><img src="pcr-img/pcr_general_info.PNG" /></p>
+<p><img src="pcr-img/pcr_split-sample.PNG" /></p>
+<p>Pour pouvoir déterminer avec confiance le nombre de composantes principales (ou facteurs) à retenir dans la PCR, l’algorithme utilise une technique de validation croisée. Une technique de validation croisée consiste à diviser l’échantillon en plusieurs groupes sur lesquels des ajustements successifs sont effectués. L’ajustement du modèle est effectué sur le groupe d’apprentissage et les résultats sont comparés aux observations du groupe test. L’efficacité prédictive est évaluée à l’aide l’indicateur PRESS (Predicted REsidual Sum of Squares).</p>
+<p>Le tableau suivant nous montre que la valeur minimale de la validation croisée est atteinte si le nombre de composantes principales est 8. Toutefois il est préférable de se fier au test qui indique si oui ou non il existe une différence significative entre les 8 composantes.</p>
+<p>Le test nous indique qu’à partir de la 4e composante il n’existe plus de différences significatives entre les composantes. Nous allons donc retenir 5 composantes pour la suite de l’analyse.</p>
+<p><img src="pcr-img/pcr_analysis_val_crois.png" /></p>
+<p>Il convient maintenant d’interpréter les résultats du modèle construit.<br />
+Le tableau suivant affiche la variation de pourcentage expliquée par composantes principales.</p>
+<p><img src="pcr-img/pcr_results.PNG" /></p>
+<p>Le tableau affiche deux catégories de résultats : la variation de pourcentage expliquée par composantes principales sur les effets du modèle (les variables explicatives) et la variation de pourcentage expliquée de la variable dépendante pour chaque facteur (ou composante) ajouté.</p>
+<p>Nous voyons donc que pour les 5 composantes retenues, la régression sur les composantes principales explique 75.93% de la variable dépendante et environ 43% des variables explicatives.</p>
+<p>Cela signifie que les 5 composantes retenues qui arrivent à expliquer 43% de la variance des variables explicatives sont capables d’expliquer 75.93% de la variance des prix.</p>
+<p>Les résultats de SAS ne nous donnent pas les coefficients associés à chaque composante. Nous pouvons donc les estimer avec R en utilisant le même nombre de composantes que la validation croisée avec SAS a indiqué.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">pc2 &lt;-<span class="st"> </span>FactoMineR<span class="op">::</span><span class="kw">PCA</span>(<span class="kw">subset</span>(base_export, </a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">                             <span class="dt">select =</span> <span class="op">-</span><span class="kw">c</span>(Sale_Price)), </a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">                       <span class="dt">graph =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">coord_pc &lt;-<span class="st"> </span><span class="kw">data.frame</span>(pc2<span class="op">$</span>ind<span class="op">$</span>coord)</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">coord_pc<span class="op">$</span>Sale_Price &lt;-<span class="st"> </span>ames<span class="op">$</span>Sale_Price</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">mod_pc &lt;-<span class="st"> </span><span class="kw">lm</span>(Sale_Price<span class="op">~</span>., <span class="dt">data =</span> coord_pc)</a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="kw">summary</span>(mod_pc)</a></code></pre></div>
+<pre><code>
+Call:
+lm(formula = Sale_Price ~ ., data = coord_pc)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-535355  -20542   -3320   17245  304779 
+
+Coefficients:
+             Estimate Std. Error  t value      Pr(&gt;|t|)    
+(Intercept) 180796.06     724.62 249.5033     &lt; 2.2e-16 ***
+Dim.1        27395.65     291.64  93.9374     &lt; 2.2e-16 ***
+Dim.2        -7046.03     415.69 -16.9502     &lt; 2.2e-16 ***
+Dim.3          478.57     497.63   0.9617        0.3363    
+Dim.4         2778.86     513.24   5.4144 0.00000006649 ***
+Dim.5         5769.77     628.86   9.1750     &lt; 2.2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 39224 on 2924 degrees of freedom
+Multiple R-squared:  0.75934,   Adjusted R-squared:  0.75893 
+F-statistic: 1845.2 on 5 and 2924 DF,  p-value: &lt; 2.22e-16</code></pre>
+<p>Les résultats globaux du modèle que nous trouvons sont les mêmes avec R. Les 5 composantes retenues expliquent bien 75,93% de la variance des prix de vente de la maison.</p>
+<p>Nous pouvons écrire ce résultat sous forme d’une équation :</p>
+<p><span class="math display">\[SalePrice = 1800796.06 + 27395.65 * Dim1 - 7046.03 * Dim2 + 478.57 * Dim3 + 2778.86* Dim4 + 5769.77* Dim5 \]</span></p>
+<p>Tous les coefficients sont positifs, à l’exception du coefficient de la dimension 2.</p>
+<p>Le coefficient de la dimension 3 est le plus faible et est non significatif (p-value &gt; 5%).</p>
+<p>Pour pouvoir interpréter les coefficients, il importe de savoir ce que mesure chaque composante. A l’aide de R nous pouvons, comme nous l’avons fait dans la section 2.3, afficher ce que mesure chaque composante en affichant les 10 premières contributions à chaque composante.</p>
+<p>Nous décidons de représenter ces composantes sur un graphique.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">retrieve_dims_contrib &lt;-<span class="st"> </span><span class="cf">function</span>(pca.obj, <span class="dt">dim =</span> <span class="dv">1</span>, <span class="dt">keep =</span> <span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">  dims =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Dim.&quot;</span>, dim)</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">  comp.df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(pca.obj<span class="op">$</span>var<span class="op">$</span>contrib)</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">  idx &lt;-<span class="st"> </span><span class="kw">order</span>(comp.df[dims], <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">  display =<span class="st"> </span><span class="kw">head</span>(comp.df[idx,][dims], keep)</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">  display<span class="op">$</span>dim &lt;-<span class="st"> </span>dims</a>
+<a class="sourceLine" id="cb23-7" data-line-number="7">  display &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(display, <span class="st">&quot;variable&quot;</span>)</a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">  <span class="kw">colnames</span>(display) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;contrib&quot;</span>, <span class="st">&quot;dim&quot;</span>)</a>
+<a class="sourceLine" id="cb23-9" data-line-number="9">  <span class="kw">return</span>(display)</a>
+<a class="sourceLine" id="cb23-10" data-line-number="10">}</a></code></pre></div>
+<p>Les contributions des variables aux différents axes factoriels sont :</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">retrieve_dims_contrib</span>(pc, <span class="dt">dim =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>) df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">retrieve_dims_contrib</span>(pc, i))</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">variable =</span> tidytext<span class="op">::</span><span class="kw">reorder_within</span>(variable, contrib, dim)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(variable, contrib)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_col</span>( <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>dim, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>, <span class="dt">nrow =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="st">  </span>tidytext<span class="op">::</span><span class="kw">scale_x_reordered</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Contributions des variables à chacune des dimensions&quot;</span>,</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">         <span class="dt">subtitle =</span> <span class="st">&quot;La longueur de la barre indique le poids de la variable sur la dimension.&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="st">  </span><span class="kw">theme_ipsum</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">30</span>),</a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">  )</a></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-24-1.png" width="3600" /></p>
+<p>Le poids des variables sur les trois premières dimensions est assez équilibré avec des amplitudes modérées (0 à 12). Les deux dernières dimensions sont chacune fortement dominées par une variable avec des amplitudes beaucoup plus grande (0 à 30).</p>
+<p>Les variables synthétiques que produit l’ACP sont orthogonales entre elles. Pour le vérifier nous pouvons représenter les corrélations entre les dimensions.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">data.frame</span>(pc<span class="op">$</span>var<span class="op">$</span>coord) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">psych<span class="op">::</span><span class="kw">pairs.panels</span>( </a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">             <span class="dt">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="co"># correlation method</span></a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">             <span class="dt">hist.col =</span> <span class="st">&quot;#00AFBB&quot;</span>,</a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">             <span class="dt">density =</span> <span class="ot">TRUE</span>,  <span class="co"># show density plots</span></a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">             <span class="dt">ellipses =</span> <span class="ot">TRUE</span>, <span class="co"># show correlation ellipses</span></a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">             <span class="dt">main =</span> <span class="st">&quot;Corrélation entre les composantes&quot;</span></a>
+<a class="sourceLine" id="cb26-8" data-line-number="8">             )</a></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-25-1.png" width="2400" /></p>
+<p>Nous voyons bien que les corrélations entre les composantes sont faibles. La plus haute en valeur absolue est 0.30 et représente la corrélation entre la dimension 1 et la dimension 3.</p>
+<div id="dimension-1" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Dimension 1</h3>
+<p>La dimension 1 fait référence à la superficie de la maison, que ce soit la taille de la résidence et des pièces qui composent la maison. Cette composante est également dans une certaine mesure influencée par l’âge de la maison (l’année où la maison a été construite et l’année où elle a été rénovée.)</p>
+</div>
+<div id="dimension-2" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Dimension 2</h3>
+<p>La deuxième dimension se réfère aux caractéristiques des maisons telles que la superficie du deuxième étage, et le nombres de pièces (salles de bain, chambres, cuisines) se trouvant au deuxième étage. Cette composante détermine donc le prestige de la maison.</p>
+</div>
+<div id="dimension-3" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Dimension 3</h3>
+<p>La troisième composante mesure l’âge de la maison et la condition de la maison au moment de la vente.</p>
+</div>
+<div id="dimension-4" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> Dimension 4</h3>
+<p>Cette composante est principalement dominée par le fait que la maison contient des parties inachevées.</p>
+</div>
+<div id="dimension-5" class="section level3">
+<h3><span class="header-section-number">5.2.5</span> Dimension 5</h3>
+<p>Cette composante est fortement dominée par le fait s’il y a une cuisine à l’étage et par la condition générale de la maison.</p>
+</div>
+</div>
+<div id="limite-de-la-régression-sur-les-composantes-principales" class="section level2">
+<h2><span class="header-section-number">5.3</span> Limite de la régression sur les composantes principales</h2>
+<p>Nous venons de voir l’intérêt de la régression sur les composantes principales. Nous avons vu notamment que les composantes issues de l’ACP sont orthogonales en ce sens qu’il cette méthode permet d’obtenir des composantes orthogonales entre elles. Toutefois, l’analyse en composante principale que nous avons effectuée maximise les variances des variables <span class="math inline">\(X\)</span> indépendamment des variations de Y : la variance de Y n’est pas maximisée. Ceci peut surestimer le poids de certaines explicatives et conduire
+de ce fait à de mauvaises interprétations des résultats.</p>
+<p>Nous pouvons donc utiliser la deuxième méthode de cette famille.</p>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="régressions-sur-variables-latentes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="régression-sur-les-moindres-carrés-partiels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"font-size": 20,
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

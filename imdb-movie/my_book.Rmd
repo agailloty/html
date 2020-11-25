@@ -1,0 +1,446 @@
+--- 
+title: "Déterminer les facteurs explicatifs du revenu d’un film"
+author: 
+- "Axel-Cleris Gailloty"
+- "Najwa Maaden"
+date: "2019-09-07"
+site: "bookdown::bookdown_site"
+output:
+  bookdown::gitbook: default
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+output_dir: "docs"
+---
+
+
+# Présentation du projet 
+
+L’Internet Movie Database (littéralement « Base de données cinématographiques d'Internet »), abrégé en IMDb, est une base de données en ligne sur le cinéma mondial, et sur la télévision.
+
+IMDb collecte des informations comme le budget consacré à la réalisation du film, le nombre de votes, la note moyenne et encore d'autres informations dans une base de donnée accessible gratuitement. 
+
+L'accessibilité des données collectées par IMDb et surtout les caractéristiques qui rendent un film unique nous ont poussé à nous interroger sur les élements qui expliquent le succès d'un film. Autrement dit, dans ce projet nous nous intéressons à la question de savoir quels sont les déterminants qui entrent dans le succès mondial d'un film.
+
+![](featured.jpg)
+
+## Résultats globaux
+
+A l'issue de ce projet nous avons découvert que ....
+
+
+
+
+
+
+# A propos des auteurs
+
+Axel-Cleris Gailloty est étudiant en Master Economie Appliquée parcours Ingénierie et Evaluation économique à [l'Université d'Angers](http://www.univ-angers.fr/fr/index.html). Il est intéressé par l'analyse des données multidimensionnelles, l'économétrie et le Machine Learning. 
+
+
+# Importation des packages
+
+Pour ce travail nous travaillerons avec le langage de programmation R. Le langage R est extrêmement puissant pour l'analyse des données et la modélisation statique. Il a été pensé pour "programmer avec des donnée", aujourd'hui ce langage est utilisé par une grande partie des professionnels en Data science. 
+
+Un des grands avanatages du langage R est sa grande communauté qui chaque jour publie de nouveaux packages (code réutilisable) s'adréssant à toute sorte de besoin dans l'analyse des données. 
+
+Nous présentons ici les packages que nous utiliserons dans ce travail.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(recipes)
+library(caret)
+library(FactoMineR)
+library(factoextra)
+# Reading the dataset
+
+df <- read_csv("../data/tmdb-movies.csv")
+```
+
+# Analyse exploratoire des données
+
+Dans cette partie nous cherchons à comprendre le jeu de données. Il sera également question de nettoyer le jeu de données afin de le préparer à l'analyse.
+
+## Qualité des données
+
+Nous voulons avant toute chose nous assurer que le jeu de données
+```{r}
+dim(df)
+```
+
+```{r}
+# Aperçu de quelques colonnes
+
+set.seed(1221) # Aléatoire
+
+df_subset <- sample(df, 6)
+
+knitr::kable(
+  head(df_subset)
+)
+```
+
+
+## Traitement des données manquantes
+
+```{r}
+# Totale de données manquantes
+
+sum(is.na(df))
+
+```
+
+Il y a un total de 13234 point manquants dans le jeu de données. Il se peut bien que la répartition des données manquantes diffèrent selon les colonnes. Nous allons vérifier cela. 
+
+```{r}
+visdat::vis_miss(df, cluster = TRUE)
+```
+
+L'image ci-dessus montre le nombre d'observations manquantes par colonnes dans le jeu de données. 
+Sur l'ensemble du jeu de données, près de 6% des données sont manquantes. La colonne qui enregistre le plus de données manquantes est la colonnes homepage (avec 72% des données manquantes). 
+
+Il est aussi possible de compter le nombre des données manquantes par colonnes pour calculer individuellement leur pourcentage.
+
+```{r}
+N_ROWS = nrow(df)
+
+sapply(df, function(x) sum(is.na(x))) %>%
+  stack() %>%
+  rename(n_missing = values, col = ind) %>%
+  filter(n_missing > 0) %>%
+  ggplot(aes(x = col, y = n_missing)) +
+  geom_col() + coord_flip()
+```
+Avant de décider la stratégie à adopter pour les données manquantes, présentons chacune de ces colonnes. 
+
+- La colonne production_companies : le studio de réalisation du film  
+- genres : Il s'agit de genre du film. Exemple drame, action ...  
+- overview : Il s'agit d'un bref résumé du film  
+- keywords : ce sont les mots-clés associés au film  
+- tagline : ce sont phrases chocs pour la publicité du film  
+- director : le producteur du film  
+- homepage : c'est le lien vers la page d'accueil du film  
+- cast : Ce sont les listes des principaux acteurs du film  
+- imdb_id : C'est l'identifiant du film selon IMDB  
+
+Complétons cette liste de colonnes par les autres colonnes présentes dans le jeu de données :
+
+- id : identifiant du film  
+- popularity : une mesure de la popularité du film attribuée par IMDB  
+- budget : le budget consacré à la réalisation du film, en dollars  
+- revenue : le revenu qu'a suscité le film.  
+- original_title : Titre original du film.   
+- runtime : la durée du film (en minute)  
+- release_date : la date de parution du film  
+- vote_count : le total des votes attribués au film  
+- vote_average : la moyenne des votes (sur 10)  
+- realease_year : année de sortie du film  
+
+Revenons donc au traitement des valeurs manquantes. Présentons les differentes stratégies pour traiter les données manquantes avec leurs avantages et incovénients : 
+
+- Supprimer les enregistrements qui contiennent les valeurs manquantes : cette stratégie est facile à mettre en place mais l'inconvénient est que faisant ainsi nous pouvons perdre beaucoup d'informations concernant le jeu de données. Voyons le nombre d'informations potentielles que nous pouvons perdre si adoptions cette stratégie.  
+```{r}
+N_ROWS - df[complete.cases(df), ] %>% nrow()
+```
+
+Nous perdrons plus de 8874 observations dans le jeu de données. Une stratégie alternative serait par exemple de supprimer uniquement les colonnes qui contiennent le plus de valeurs manquantes et conserver celles qui ont en que peu.  
+
+En général la stratégie de supprimer les observations manquantes ne marche pas bien car il est possible de perdre beaucoup d'informations. Nous allons plutôt nous focaliser sur les stratégies d'imputations des valeurs manquantes.     
+
+Imputer des valeurs manquantes consiste à utiliser une stratégie qui dévine au mieux la valeur manquante dans la colonne.   
+
+Pour une colonne numérique et continue, par exemple nous pouvons remplacer chaque valeur manquante par la indicateurs de distributions telles que la moyenne, la médiane ou encore le mode. Pour une colonne catégorique, nous pouvons par exemple remplacer la valeur maquante par la valeur ayant la plus grande fréquence (le mode de la distribution). Toutes ces stratégies n'ont en réalité qu'un seul but : réduire la perte d'information et préserver au mieux la vraissemblance de la distribution.   
+
+Toutefois il existe des solutions plus sophistiquées plus imputer les valeurs manquantes. Ces solutions utilisent pour la plupart des algorithmes de Machine Learning et sont plus performantes; l'avantage des méthodes d'imputations de Machine Learning est qu'elles simulent la distribution des valeurs dans un espace à N dimensions alors que les méthodes d'imputation classique n'utilisent qu'une seule dimension qui est celle de la colonne.   
+
+Là où une imputation par la moyenne remplace la valeur manquante par la moyenne de la colonne, une imputation utilisant le Machine Learning (par exemple K-Nearest Neighbors) va remplacer la valeur manquante par la moyenne de K individus dont la distance euclidienne dans N dimensions est la plus faible. Cela fait donc que la vraissemblance de la valeur prédite est plus haute.  
+
+## Imputation des valeurs manquantes
+
+Nous allons maintenant imputer les valeurs manquantes. Toutefois à l'issue de la description que nous avions faite des colonnes, il existe des colonnes qui n'ont réellement pas de valeurs dans la prédiction des données et certaines colonnes dont imputer des valeurs n'aurait pas de sens. 
+Les colonnes id et id_imdb ne sont que des identifiants utilisés pour distinguer les films, nous pouvons les supprimer sans risque de perdre des informations. 
+
+Imputer la colonne homepage par le mode ne fait aucun sens car chaque film est unique et a forcément sa page d'accueil. Il serait plus intelligent de remplacer les valeurs manquantes par "Inconnu" car après tout cette information nous est inconnue. Nous verrons plus tard comment transformer cette colonne en un élement plus intéressant.
+
+Similairement les colonnes production_companies, director, cast, taglines, overview sont uniques à chaque film, la chance de se tromper si on utilise de l'inférence pour remplacer les valeurs manquantes qu'elles contiennent est très grande. Donc il serait nécessaire de les remplacer aussi par "Inconnu".
+
+Nous allons faire une copie du jeu de données. Cette sur cette copie que nous appliqueront les imputations.
+
+
+
+```{r}
+txt_columns <- select_if(df, is.character) %>% colnames()
+num_txt_columns <- length(txt_columns)
+
+unique_occurences <- vector(mode = "numeric", length = num_txt_columns)
+
+for (txt_col in txt_columns){
+  unique_occurences[txt_col] <- separate_rows(df, col = txt_col, sep = "[|]") %>%
+  pull(!!txt_col) %>% unique() %>% length()
+}
+
+df_uniq_col_occurences <- unique_occurences[unique_occurences > 0] %>% data.frame() %>%
+  tibble::rownames_to_column()
+colnames(df_uniq_col_occurences) <- c("column","uniq_occurence")
+
+ggplot(df_uniq_col_occurences, aes(x = column, y = uniq_occurence)) +
+  geom_col() + coord_flip()
+```
+
+Nous observons à partir de ce graphique que lorsque nous élargissons les niveaux des colonnes textuels le nombre des dudits niveaux sont trop nombreux à l'exception de la colonne `genres` qui en a très peu. Si nous décidons d'étendre ces niveux pour devenir des colonnes alors le nombre de colonnes dépassera forcément le nombre d'observations et le temps de calcul risque d'être très grand. Nous allons tout simplement les effacer du jeu de données.
+
+Nous pouvons également exploiter la colonne `release_date` pour n'extraire que les mois de l'année car nous savons qu'une année n'a que 12 niveaux.
+
+```{r}
+ready_df <- df %>% 
+  select(-c(id, tagline, production_companies, overview, 
+            original_title, keywords, imdb_id, homepage, director, cast))
+
+# Transformons les niveaux de la colonne genre en plusieurs colonnes binaires
+
+ready_df <- separate_rows(ready_df, col = "genres" , sep = "[|]") %>%
+  distinct() %>%
+  mutate(dummy = 1) %>%
+  spread(key = "genres", value = dummy, fill = 0)
+
+# Transformons les mois de sortie des films en colonnes binaires
+
+  ready_df <- ready_df %>% 
+    mutate(release_date = as.Date.character(ready_df$release_date, format = "%m/%d/%y"),
+         month = months(release_date)) %>%
+  mutate(dummy = 1) %>%
+  spread(key = "month", value = dummy, fill = 0) 
+  
+  # Supprimer la colonne NA
+  
+  ready_df <- select(ready_df, -c("<NA>", "release_date"))
+
+```
+
+```{r}
+df_subset <- sample(ready_df, 6)
+
+knitr::kable(
+  head(df_subset)
+)
+```
+
+Les deux transformations ue nous venons d'appliquer sur le jeu de données initial (étendre les niveaux de la colonne `genres` et ceux de la colonne `release_date` transformée en data) font que dès maintenant le jeu de données contient 43 colonnes en total. 
+
+L'idée pour le reste du travail à venir est de réduire les dimensions du jeu de données par une opération de diagonalisation du genre l'Analyse en Composante Principale (ACP) en vue d'approfondir notre connaissance du jeu de données.
+
+Le bloc de code suivant vérifie que le jeu de données ne contient plus aucune valeur manquante et le prépare à être utilisé dans une ACP.
+
+```{r}
+sum(is.na(ready_df))
+```
+
+Les transformations que nous avions appliquées sur le jeu de données ont permis d'enlever les valeurs manquantes. Rappellons que les valeurs manquantes se concentraient principalement dans les colonnes non-numériques avec le plus grand ratio étant celui de la colonne `homepage`.
+
+## L'Analyse en composantes principales
+```{r}
+acp <- PCA(ready_df, graph = FALSE, scale.unit = TRUE)
+```
+
+Les résultats de l'ACP sont enregistrés dans la variable acp créée pour cet effet. Nous voulons maintenant observer et interpréter les résultats afin d'avoir une large compréhension du jeu de données.
+
+Il est possible d'imprimer les résultats de l'ACP sur l'écran grâce à la fonction `summary()` mais procéder ainsi ne nous sera pas d'une grande utilité. Il est plus intéressant de visualiser ces résultats. C'est ce que nous ferons dans la partie visualisation.
+
+
+# Visualisation des données
+
+```{r}
+fviz_screeplot(acp)
+```
+
+```{r}
+fviz_pca_var(acp, repel = TRUE)
+```
+
+
+## Visualisation des composantes principales
+
+## Nuage de points
+
+```{r}
+ready_df %>%
+  ggplot(aes(x = budget, y = revenue)) +
+  geom_point() + geom_smooth(method = "lm") +
+  labs(title = " Relation entre le budget dépensé et le revenu")
+```
+
+Lien entre la popularité et le budget
+
+```{r}
+ready_df %>%
+  ggplot(aes(x = budget, y = popularity)) +
+  geom_point() + geom_smooth(method = "lm") +
+  labs(title = " Relation entre le budget dépensé et la popularité du film")
+```
+
+Lien entre la popularité et le revenu du film
+
+```{r}
+ready_df %>%
+  ggplot(aes(x = revenue, y = popularity)) +
+  geom_point() + geom_smooth(method = "lm") +
+  labs(title = " Relation entre le revenu et la popularité du film")
+```
+
+
+## Correlations
+
+```{r fig.height=8, fig.width=12}
+ggcorrplot::ggcorrplot(
+  cor(ready_df), colors = c("green", "white", "red",
+                            hc.order = TRUE, type = "lower")
+)
+```
+
+
+## Densité des colonnes et normalisations
+
+```{r fig.height=4, fig.width=14}
+ready_df %>%
+  select(revenue, budget, popularity, vote_average) %>%
+  mutate(id = "corr") %>%
+  reshape2::melt(id.var = "id") %>%
+  ggplot(aes(x = value)) + geom_histogram( bins = 100) +
+  facet_wrap(~variable, ncol = 4, scale = "free")
+```
+
+A l'exception de la colonne `vote_average`, toutes les autres colonnes sont loin de suivre une distribution normale.
+
+Il y a évidemment dans ces colonnes des valeurs atypiques (outliers). Représentons à l'aide des boîtes à moustaches ces colonnes
+
+```{r fig.height=8, fig.width=12}
+ready_df %>%
+  select(revenue, budget, popularity, vote_average) %>%
+  mutate(id = "corr") %>%
+  reshape2::melt(id.var = "id") %>%
+  ggplot(aes(y = value, x = "Distribution")) + geom_boxplot() +
+  facet_wrap(~variable, ncol = 2, scale = "free")
+```
+
+L'intuition que nous avions eu sur les valeurs atypiques s'avèrent à la vue de ces colonnes. Mettons dans un tableau l'ensemble des indicateurs de moments pour chacune de ces colonnes afin d'observer là il y a anomalie dans la distribution des données.
+
+```{r}
+print("Indicateurs de tendance centrale du revenu")
+quantile(ready_df$revenue)
+```
+
+
+```{r}
+print("Indicateurs de tendance centrale du budget")
+quantile(ready_df$budget)
+```
+
+Il semble bien qu'il y ait un problème avec les données car le minimum des revenus est 0, cela ne peut se faire
+
+```{r fig.height=4, fig.width=14}
+ready_df %>%
+  select(revenue, budget, popularity, vote_average) %>%
+  mutate(id = "corr") %>%
+  reshape2::melt(id.var = "id") %>%
+  ggplot(aes(x = value)) + geom_density() +
+  facet_wrap(~variable, ncol = 4, scale = "free")
+```
+
+Il serait intéressant de normaliser chacune de ces colonnes pour les rapprocher d'une distribution normale. Si nous essayons d'estimer le revenu du film à partir de ces colonnes numériques avec une régression linéaire OLS, nous risquons de construire un modèle biaisé avec cette configuration. 
+
+Il existe une transformation qui porte le nom de ces auteurs Yeo et Johnson qui consiste à rapprocher vers une distribution normale des colonnes qui ne le sont pas. Nous allons essayer cette trasnformation pour voir si nous pouvons améliorer la qualité d'un modèle.
+
+```{r}
+(blueprint <- recipe(revenue~., data = ready_df) %>%
+  step_YeoJohnson(all_predictors(), budget, vote_average, popularity, revenue))
+
+
+```
+
+```{r}
+blueprint <- prep(blueprint)
+new_df <- blueprint$template
+```
+
+
+```{r fig.height=4, fig.width=14}
+new_df %>%
+  select(revenue, budget, popularity, vote_average) %>%
+  mutate(id = "corr") %>%
+  reshape2::melt(id.var = "id") %>%
+  ggplot(aes(x = value)) + geom_density() +
+  facet_wrap(~variable, ncol = 4, scale = "free")
+```
+
+## Colonnes catégoriques
+
+```{r fig.height=20, fig.width=32}
+ready_df %>%
+  select(Action:septembre) %>%
+  mutate_all(~as.factor(.)) %>%
+  mutate(id = "categorical") %>%
+  reshape2::melt(id.var = "id") %>%
+  ggplot(aes(x = value)) +geom_bar() + 
+  facet_wrap(~variable, ncol = 4, scale = "free")
+```
+
+
+# Modélisation 
+
+Le but de la modélisation est de trouver une fonction des paramètres capable de générer pour chaque point de données la valeur de l'endogène.  
+
+En d'autres termes, en modélisant le revenu du film comme fonction des paramètres comme le budget, le genre du film, l'année de sortie etc... nous recherchons un vecteur de coefficients pour chacun de ces paramètres.
+
+Nous pouvons exprimer cela sous cette forme :
+
+$$revenu = \beta_1 * budget + \beta_2 * genre + ... + \beta_n * X $$
+Où $\beta$ représente la valeur des paramètres.
+
+Ici nous essayons de modéliser une variable numérique continue, ce type de modélisation s'appelle "régression". Il existe plusieurs types de régressions. Nous utiliserons dans ce projet les types de régression qui s'appliquent les mieux à notre jeu de données et surtout notre but est d'en finir avec un modèle qui nous permet d'expliquer les relations causales entre les variables. 
+
+
+## Regression linéaire simple
+
+Nous commençons avec une régression linéaire simple (RLS). Ici nous essayons d'expliquer le revenu du film à partir d'une seule variable, qui pour le moment est le budget. En d'autres termes nous essayons de trouver une équation du style
+$$ revenu = const + \beta * budget $$
+```{r}
+reg_simple <- lm(revenue~budget, data = ready_df)
+
+summary(reg_simple)
+```
+
+
+## Régression linéaire multiple
+
+## Régularisation
+
+### Régression contrainte Ridge
+
+### Régression contrainte LASSO
+
+
+# Evaluation des modèles
+
+
+# Conclusion
+
+Ce travail nous a permis de nous rendre de certaines difficultés rencontrées dans les projets de data science à savoir la préparation, le nettoyage des données. 
+Si nous avons pu trouver que le budget initial consacré à la réalisation du film joue un rôle essentiel dans la ......
+Toutefois les résultats que nous avons trouvés doivent être pris avec un regard critique.
+
+# Note sur la reproductibilité
+
+Ces travaux ont été menés avec les environnements suivants :
+```{r}
+sessionInfo()
+```
+
+
+# Bibliographie
+```{r}
+citation(package = "tidyverse")
+citation(package = "caret")
+citation(package = "dplyr")
+citation(package = "ggplot2")
+```
+

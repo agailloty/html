@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Using Rstudio server on the Windows 10 subsystem for Linux</title>
+  <meta name="description" content="Using Rstudio server on the Windows 10 subsystem for Linux" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Using Rstudio server on the Windows 10 subsystem for Linux" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Using Rstudio server on the Windows 10 subsystem for Linux" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="install-wsl-2-and-configure-it-on-windows-10.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#goal-of-the-tutorial"><i class="fa fa-check"></i><b>1.1</b> Goal of the tutorial</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html"><i class="fa fa-check"></i><b>2</b> Install WSL 2 and configure it on Windows 10</a><ul>
+<li class="chapter" data-level="2.1" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html#prerequisites"><i class="fa fa-check"></i><b>2.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2.2" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html#activate-wsl-2-and-virtual-machine-platform-using-powershell"><i class="fa fa-check"></i><b>2.2</b> Activate WSL 2 and Virtual Machine Platform using Powershell</a></li>
+<li class="chapter" data-level="2.3" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html#activate-wsl-2-and-the-virtual-platform-via-the-graphical-user-interface"><i class="fa fa-check"></i><b>2.3</b> Activate WSL 2 and the Virtual Platform via the Graphical User Interface</a></li>
+<li class="chapter" data-level="2.4" data-path="install-wsl-2-and-configure-it-on-windows-10.html"><a href="install-wsl-2-and-configure-it-on-windows-10.html#making-wsl-2-default"><i class="fa fa-check"></i><b>2.4</b> Making WSL 2 default</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installing-ubuntu.html"><a href="installing-ubuntu.html"><i class="fa fa-check"></i><b>3</b> Installing Ubuntu</a><ul>
+<li class="chapter" data-level="3.1" data-path="installing-ubuntu.html"><a href="installing-ubuntu.html#download-ubuntu-from-the-windows-store"><i class="fa fa-check"></i><b>3.1</b> Download Ubuntu from the Windows Store</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="installing-ubuntu.html"><a href="installing-ubuntu.html#case-when-you-previously-have-a-linux-distribution-running-wsl-1"><i class="fa fa-check"></i><b>3.1.1</b> Case when you previously have a Linux distribution running WSL 1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="installing-r-and-rstudio-server.html"><a href="installing-r-and-rstudio-server.html"><i class="fa fa-check"></i><b>4</b> Installing R and Rstudio Server</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Using Rstudio server on the Windows 10 subsystem for Linux</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Using Rstudio server on the Windows 10 subsystem for Linux</h1>
+<p class="author"><em>Axel-Cleris Gailloty</em></p>
+</div>
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>Not so long ago I’ve started using intensively Linux. I really love the power of open source softwares. Linux may be intimidating when you start using it but when you understand how it works, your computer will no more have secrets for you.</p>
+<p>Developping in Linux offered me the best ever experience I’ve had so far. I am not saying that Windows is bad but I just very comfortable using <code>bash</code> and easy is it to install any package just through a few command line with <code>apt</code> for Debian based Linux distributions.</p>
+<p>One of the major advantages I’ve found so far using Linux over Windows is about networking and the ability to easily connect and using your computer resources remotely.</p>
+<p>In reality today the majority of web and cloud servers are running Linux and that is not because Linux is free but because at its core Linux was designed to help computers communicate.</p>
+<p>When I bought my computer, like the majority of the PCs yo would buy today, it was shipped with the latest Windows 10 OS. I am really happy with that operating system for my college courses. Most of the softwares including R, Python, Stata, SAS, Gretl all work really fine on Windows and so no need to look elsewhere.</p>
+<p>But as I started to do web developement I’ve come to have little hard times with Windows.
+I remember a web application I was developping using the <a href="https://shiny.rstudio.com/">R Shiny framework</a>. I can preview the functionalities I added to the application through my web browser when I run the application. I wanted to make it visible to the other members of the team but the only way to do so was through the <a href="https://rstudio.com/products/shiny/shiny-server/">Shiny server</a> which only work on Linux OSs.</p>
+<p>This leads me to install <a href="">Kubuntu</a> as dual boot on another partition of my laptop. With that I could provide an IP address with a port to the rest of the team to use the application : logging in, updating the database.</p>
+<p>Also as the final version of the application will be served on the server of the Institute I needed to manage few details on deployment, which I finally did using Linux.</p>
+<div id="goal-of-the-tutorial" class="section level2">
+<h2><span class="header-section-number">1.1</span> Goal of the tutorial</h2>
+<p>I am really excited to present this tutorial because the content I find is really mind blowing and it offers a serious compromise : combining both the power of Windows and Linux at the same on the same computer.</p>
+<p>Here’s the outline of what I will discuss :</p>
+<ul>
+<li>How to install the Windows Subsystem for Linux (WSL 2) and enable it<br />
+</li>
+<li>How to install a Linux distribution (Ubuntu for this tutorial, but you can install any distribution you’re familiar with)<br />
+</li>
+<li>How to install R and Rstudio Server on that Linux distribution<br />
+</li>
+<li>How to use the Rstudio Server through your Windows running browser<br />
+</li>
+<li>How to access Rstudio server on any computer (or tablets, smartphones) connected to your Local Area Network (LAN)</li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="install-wsl-2-and-configure-it-on-windows-10.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

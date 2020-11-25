@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Analyse exploratoire des données | Déterminer les facteurs explicatifs du revenu d’un film</title>
+  <meta name="description" content="4 Analyse exploratoire des données | Déterminer les facteurs explicatifs du revenu d’un film" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Analyse exploratoire des données | Déterminer les facteurs explicatifs du revenu d’un film" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Analyse exploratoire des données | Déterminer les facteurs explicatifs du revenu d’un film" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+<meta name="author" content="Najwa Maaden" />
+
+
+<meta name="date" content="2019-09-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importation-des-packages.html"/>
+<link rel="next" href="visualisation-des-donnees.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="presentation-du-projet.html"><a href="presentation-du-projet.html"><i class="fa fa-check"></i><b>1</b> Présentation du projet</a><ul>
+<li class="chapter" data-level="1.1" data-path="presentation-du-projet.html"><a href="presentation-du-projet.html#resultats-globaux"><i class="fa fa-check"></i><b>1.1</b> Résultats globaux</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-propos-des-auteurs.html"><a href="a-propos-des-auteurs.html"><i class="fa fa-check"></i><b>2</b> A propos des auteurs</a></li>
+<li class="chapter" data-level="3" data-path="importation-des-packages.html"><a href="importation-des-packages.html"><i class="fa fa-check"></i><b>3</b> Importation des packages</a></li>
+<li class="chapter" data-level="4" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html"><i class="fa fa-check"></i><b>4</b> Analyse exploratoire des données</a><ul>
+<li class="chapter" data-level="4.1" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#qualite-des-donnees"><i class="fa fa-check"></i><b>4.1</b> Qualité des données</a></li>
+<li class="chapter" data-level="4.2" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#traitement-des-donnees-manquantes"><i class="fa fa-check"></i><b>4.2</b> Traitement des données manquantes</a></li>
+<li class="chapter" data-level="4.3" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#imputation-des-valeurs-manquantes"><i class="fa fa-check"></i><b>4.3</b> Imputation des valeurs manquantes</a></li>
+<li class="chapter" data-level="4.4" data-path="analyse-exploratoire-des-donnees.html"><a href="analyse-exploratoire-des-donnees.html#lanalyse-en-composantes-principales"><i class="fa fa-check"></i><b>4.4</b> L’Analyse en composantes principales</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html"><i class="fa fa-check"></i><b>5</b> Visualisation des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#visualisation-des-composantes-principales"><i class="fa fa-check"></i><b>5.1</b> Visualisation des composantes principales</a></li>
+<li class="chapter" data-level="5.2" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#nuage-de-points"><i class="fa fa-check"></i><b>5.2</b> Nuage de points</a></li>
+<li class="chapter" data-level="5.3" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#correlations"><i class="fa fa-check"></i><b>5.3</b> Correlations</a></li>
+<li class="chapter" data-level="5.4" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#densite-des-colonnes-et-normalisations"><i class="fa fa-check"></i><b>5.4</b> Densité des colonnes et normalisations</a></li>
+<li class="chapter" data-level="5.5" data-path="visualisation-des-donnees.html"><a href="visualisation-des-donnees.html#colonnes-categoriques"><i class="fa fa-check"></i><b>5.5</b> Colonnes catégoriques</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modelisation.html"><a href="modelisation.html"><i class="fa fa-check"></i><b>6</b> Modélisation</a><ul>
+<li class="chapter" data-level="6.1" data-path="modelisation.html"><a href="modelisation.html#regression-lineaire-simple"><i class="fa fa-check"></i><b>6.1</b> Regression linéaire simple</a></li>
+<li class="chapter" data-level="6.2" data-path="modelisation.html"><a href="modelisation.html#regression-lineaire-multiple"><i class="fa fa-check"></i><b>6.2</b> Régression linéaire multiple</a></li>
+<li class="chapter" data-level="6.3" data-path="modelisation.html"><a href="modelisation.html#regularisation"><i class="fa fa-check"></i><b>6.3</b> Régularisation</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="modelisation.html"><a href="modelisation.html#regression-contrainte-ridge"><i class="fa fa-check"></i><b>6.3.1</b> Régression contrainte Ridge</a></li>
+<li class="chapter" data-level="6.3.2" data-path="modelisation.html"><a href="modelisation.html#regression-contrainte-lasso"><i class="fa fa-check"></i><b>6.3.2</b> Régression contrainte LASSO</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="evaluation-des-modeles.html"><a href="evaluation-des-modeles.html"><i class="fa fa-check"></i><b>7</b> Evaluation des modèles</a></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="9" data-path="note-sur-la-reproductibilite.html"><a href="note-sur-la-reproductibilite.html"><i class="fa fa-check"></i><b>9</b> Note sur la reproductibilité</a></li>
+<li class="chapter" data-level="10" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>10</b> Bibliographie</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Déterminer les facteurs explicatifs du revenu d’un film</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analyse-exploratoire-des-donnees" class="section level1">
+<h1><span class="header-section-number">4</span> Analyse exploratoire des données</h1>
+<p>Dans cette partie nous cherchons à comprendre le jeu de données. Il sera également question de nettoyer le jeu de données afin de le préparer à l’analyse.</p>
+<div id="qualite-des-donnees" class="section level2">
+<h2><span class="header-section-number">4.1</span> Qualité des données</h2>
+<p>Nous voulons avant toute chose nous assurer que le jeu de données</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">dim</span>(df)</a></code></pre></div>
+<pre><code>## [1] 10866    21</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Aperçu de quelques colonnes</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">set.seed</span>(<span class="dv">1221</span>) <span class="co"># Aléatoire</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5">df_subset &lt;-<span class="st"> </span><span class="kw">sample</span>(df, <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">head</span>(df_subset)</a>
+<a class="sourceLine" id="cb4-9" title="9">)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">original_title</th>
+<th align="left">imdb_id</th>
+<th align="right">revenue_adj</th>
+<th align="left">genres</th>
+<th align="left">director</th>
+<th align="left">release_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Jurassic World</td>
+<td align="left">tt0369610</td>
+<td align="right">1392445893</td>
+<td align="left">Action|Adventure|Science Fiction|Thriller</td>
+<td align="left">Colin Trevorrow</td>
+<td align="left">6/9/15</td>
+</tr>
+<tr class="even">
+<td align="left">Mad Max: Fury Road</td>
+<td align="left">tt1392190</td>
+<td align="right">348161292</td>
+<td align="left">Action|Adventure|Science Fiction|Thriller</td>
+<td align="left">George Miller</td>
+<td align="left">5/13/15</td>
+</tr>
+<tr class="odd">
+<td align="left">Insurgent</td>
+<td align="left">tt2908446</td>
+<td align="right">271619025</td>
+<td align="left">Adventure|Science Fiction|Thriller</td>
+<td align="left">Robert Schwentke</td>
+<td align="left">3/18/15</td>
+</tr>
+<tr class="even">
+<td align="left">Star Wars: The Force Awakens</td>
+<td align="left">tt2488496</td>
+<td align="right">1902723130</td>
+<td align="left">Action|Adventure|Science Fiction|Fantasy</td>
+<td align="left">J.J. Abrams</td>
+<td align="left">12/15/15</td>
+</tr>
+<tr class="odd">
+<td align="left">Furious 7</td>
+<td align="left">tt2820852</td>
+<td align="right">1385748801</td>
+<td align="left">Action|Crime|Thriller</td>
+<td align="left">James Wan</td>
+<td align="left">4/1/15</td>
+</tr>
+<tr class="even">
+<td align="left">The Revenant</td>
+<td align="left">tt1663202</td>
+<td align="right">490314247</td>
+<td align="left">Western|Drama|Adventure|Thriller</td>
+<td align="left">Alejandro GonzÃ¡lez IÃ±Ã¡rritu</td>
+<td align="left">12/25/15</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="traitement-des-donnees-manquantes" class="section level2">
+<h2><span class="header-section-number">4.2</span> Traitement des données manquantes</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Totale de données manquantes</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">sum</span>(<span class="kw">is.na</span>(df))</a></code></pre></div>
+<pre><code>## [1] 13434</code></pre>
+<p>Il y a un total de 13234 point manquants dans le jeu de données. Il se peut bien que la répartition des données manquantes diffèrent selon les colonnes. Nous allons vérifier cela.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">visdat<span class="op">::</span><span class="kw">vis_miss</span>(df, <span class="dt">cluster =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="my_book_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>L’image ci-dessus montre le nombre d’observations manquantes par colonnes dans le jeu de données.
+Sur l’ensemble du jeu de données, près de 6% des données sont manquantes. La colonne qui enregistre le plus de données manquantes est la colonnes homepage (avec 72% des données manquantes).</p>
+<p>Il est aussi possible de compter le nombre des données manquantes par colonnes pour calculer individuellement leur pourcentage.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">N_ROWS =<span class="st"> </span><span class="kw">nrow</span>(df)</a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">sapply</span>(df, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span><span class="kw">stack</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">n_missing =</span> values, <span class="dt">col =</span> ind) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="st">  </span><span class="kw">filter</span>(n_missing <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> col, <span class="dt">y =</span> n_missing)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<p><img src="my_book_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+Avant de décider la stratégie à adopter pour les données manquantes, présentons chacune de ces colonnes.</p>
+<ul>
+<li>La colonne production_companies : le studio de réalisation du film<br />
+</li>
+<li>genres : Il s’agit de genre du film. Exemple drame, action …<br />
+</li>
+<li>overview : Il s’agit d’un bref résumé du film<br />
+</li>
+<li>keywords : ce sont les mots-clés associés au film<br />
+</li>
+<li>tagline : ce sont phrases chocs pour la publicité du film<br />
+</li>
+<li>director : le producteur du film<br />
+</li>
+<li>homepage : c’est le lien vers la page d’accueil du film<br />
+</li>
+<li>cast : Ce sont les listes des principaux acteurs du film<br />
+</li>
+<li>imdb_id : C’est l’identifiant du film selon IMDB</li>
+</ul>
+<p>Complétons cette liste de colonnes par les autres colonnes présentes dans le jeu de données :</p>
+<ul>
+<li>id : identifiant du film<br />
+</li>
+<li>popularity : une mesure de la popularité du film attribuée par IMDB<br />
+</li>
+<li>budget : le budget consacré à la réalisation du film, en dollars<br />
+</li>
+<li>revenue : le revenu qu’a suscité le film.<br />
+</li>
+<li>original_title : Titre original du film.<br />
+</li>
+<li>runtime : la durée du film (en minute)<br />
+</li>
+<li>release_date : la date de parution du film<br />
+</li>
+<li>vote_count : le total des votes attribués au film<br />
+</li>
+<li>vote_average : la moyenne des votes (sur 10)<br />
+</li>
+<li>realease_year : année de sortie du film</li>
+</ul>
+<p>Revenons donc au traitement des valeurs manquantes. Présentons les differentes stratégies pour traiter les données manquantes avec leurs avantages et incovénients :</p>
+<ul>
+<li>Supprimer les enregistrements qui contiennent les valeurs manquantes : cette stratégie est facile à mettre en place mais l’inconvénient est que faisant ainsi nous pouvons perdre beaucoup d’informations concernant le jeu de données. Voyons le nombre d’informations potentielles que nous pouvons perdre si adoptions cette stratégie.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">N_ROWS <span class="op">-</span><span class="st"> </span>df[<span class="kw">complete.cases</span>(df), ] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>()</a></code></pre></div>
+<pre><code>## [1] 8874</code></pre>
+<p>Nous perdrons plus de 8874 observations dans le jeu de données. Une stratégie alternative serait par exemple de supprimer uniquement les colonnes qui contiennent le plus de valeurs manquantes et conserver celles qui ont en que peu.</p>
+<p>En général la stratégie de supprimer les observations manquantes ne marche pas bien car il est possible de perdre beaucoup d’informations. Nous allons plutôt nous focaliser sur les stratégies d’imputations des valeurs manquantes.</p>
+<p>Imputer des valeurs manquantes consiste à utiliser une stratégie qui dévine au mieux la valeur manquante dans la colonne.</p>
+<p>Pour une colonne numérique et continue, par exemple nous pouvons remplacer chaque valeur manquante par la indicateurs de distributions telles que la moyenne, la médiane ou encore le mode. Pour une colonne catégorique, nous pouvons par exemple remplacer la valeur maquante par la valeur ayant la plus grande fréquence (le mode de la distribution). Toutes ces stratégies n’ont en réalité qu’un seul but : réduire la perte d’information et préserver au mieux la vraissemblance de la distribution.</p>
+<p>Toutefois il existe des solutions plus sophistiquées plus imputer les valeurs manquantes. Ces solutions utilisent pour la plupart des algorithmes de Machine Learning et sont plus performantes; l’avantage des méthodes d’imputations de Machine Learning est qu’elles simulent la distribution des valeurs dans un espace à N dimensions alors que les méthodes d’imputation classique n’utilisent qu’une seule dimension qui est celle de la colonne.</p>
+<p>Là où une imputation par la moyenne remplace la valeur manquante par la moyenne de la colonne, une imputation utilisant le Machine Learning (par exemple K-Nearest Neighbors) va remplacer la valeur manquante par la moyenne de K individus dont la distance euclidienne dans N dimensions est la plus faible. Cela fait donc que la vraissemblance de la valeur prédite est plus haute.</p>
+</div>
+<div id="imputation-des-valeurs-manquantes" class="section level2">
+<h2><span class="header-section-number">4.3</span> Imputation des valeurs manquantes</h2>
+<p>Nous allons maintenant imputer les valeurs manquantes. Toutefois à l’issue de la description que nous avions faite des colonnes, il existe des colonnes qui n’ont réellement pas de valeurs dans la prédiction des données et certaines colonnes dont imputer des valeurs n’aurait pas de sens.
+Les colonnes id et id_imdb ne sont que des identifiants utilisés pour distinguer les films, nous pouvons les supprimer sans risque de perdre des informations.</p>
+<p>Imputer la colonne homepage par le mode ne fait aucun sens car chaque film est unique et a forcément sa page d’accueil. Il serait plus intelligent de remplacer les valeurs manquantes par “Inconnu” car après tout cette information nous est inconnue. Nous verrons plus tard comment transformer cette colonne en un élement plus intéressant.</p>
+<p>Similairement les colonnes production_companies, director, cast, taglines, overview sont uniques à chaque film, la chance de se tromper si on utilise de l’inférence pour remplacer les valeurs manquantes qu’elles contiennent est très grande. Donc il serait nécessaire de les remplacer aussi par “Inconnu”.</p>
+<p>Nous allons faire une copie du jeu de données. Cette sur cette copie que nous appliqueront les imputations.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">txt_columns &lt;-<span class="st"> </span><span class="kw">select_if</span>(df, is.character) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">colnames</span>()</a>
+<a class="sourceLine" id="cb11-2" title="2">num_txt_columns &lt;-<span class="st"> </span><span class="kw">length</span>(txt_columns)</a>
+<a class="sourceLine" id="cb11-3" title="3"></a>
+<a class="sourceLine" id="cb11-4" title="4">unique_occurences &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&quot;numeric&quot;</span>, <span class="dt">length =</span> num_txt_columns)</a>
+<a class="sourceLine" id="cb11-5" title="5"></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="cf">for</span> (txt_col <span class="cf">in</span> txt_columns){</a>
+<a class="sourceLine" id="cb11-7" title="7">  unique_occurences[txt_col] &lt;-<span class="st"> </span><span class="kw">separate_rows</span>(df, <span class="dt">col =</span> txt_col, <span class="dt">sep =</span> <span class="st">&quot;[|]&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="st">  </span><span class="kw">pull</span>(<span class="op">!!</span>txt_col) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>()</a>
+<a class="sourceLine" id="cb11-9" title="9">}</a>
+<a class="sourceLine" id="cb11-10" title="10"></a>
+<a class="sourceLine" id="cb11-11" title="11">df_uniq_col_occurences &lt;-<span class="st"> </span>unique_occurences[unique_occurences <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">rownames_to_column</span>()</a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="kw">colnames</span>(df_uniq_col_occurences) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;column&quot;</span>,<span class="st">&quot;uniq_occurence&quot;</span>)</a>
+<a class="sourceLine" id="cb11-14" title="14"></a>
+<a class="sourceLine" id="cb11-15" title="15"><span class="kw">ggplot</span>(df_uniq_col_occurences, <span class="kw">aes</span>(<span class="dt">x =</span> column, <span class="dt">y =</span> uniq_occurence)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-16" title="16"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<p><img src="my_book_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Nous observons à partir de ce graphique que lorsque nous élargissons les niveaux des colonnes textuels le nombre des dudits niveaux sont trop nombreux à l’exception de la colonne <code>genres</code> qui en a très peu. Si nous décidons d’étendre ces niveux pour devenir des colonnes alors le nombre de colonnes dépassera forcément le nombre d’observations et le temps de calcul risque d’être très grand. Nous allons tout simplement les effacer du jeu de données.</p>
+<p>Nous pouvons également exploiter la colonne <code>release_date</code> pour n’extraire que les mois de l’année car nous savons qu’une année n’a que 12 niveaux.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">ready_df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(id, tagline, production_companies, overview, </a>
+<a class="sourceLine" id="cb12-3" title="3">            original_title, keywords, imdb_id, homepage, director, cast))</a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co"># Transformons les niveaux de la colonne genre en plusieurs colonnes binaires</span></a>
+<a class="sourceLine" id="cb12-6" title="6"></a>
+<a class="sourceLine" id="cb12-7" title="7">ready_df &lt;-<span class="st"> </span><span class="kw">separate_rows</span>(ready_df, <span class="dt">col =</span> <span class="st">&quot;genres&quot;</span> , <span class="dt">sep =</span> <span class="st">&quot;[|]&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dummy =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> <span class="st">&quot;genres&quot;</span>, <span class="dt">value =</span> dummy, <span class="dt">fill =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb12-11" title="11"></a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="co"># Transformons les mois de sortie des films en colonnes binaires</span></a>
+<a class="sourceLine" id="cb12-13" title="13"></a>
+<a class="sourceLine" id="cb12-14" title="14">  ready_df &lt;-<span class="st"> </span>ready_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-15" title="15"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">release_date =</span> <span class="kw">as.Date.character</span>(ready_df<span class="op">$</span>release_date, <span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>),</a>
+<a class="sourceLine" id="cb12-16" title="16">         <span class="dt">month =</span> <span class="kw">months</span>(release_date)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-17" title="17"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dummy =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-18" title="18"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> <span class="st">&quot;month&quot;</span>, <span class="dt">value =</span> dummy, <span class="dt">fill =</span> <span class="dv">0</span>) </a>
+<a class="sourceLine" id="cb12-19" title="19">  </a>
+<a class="sourceLine" id="cb12-20" title="20">  <span class="co"># Supprimer la colonne NA</span></a>
+<a class="sourceLine" id="cb12-21" title="21">  </a>
+<a class="sourceLine" id="cb12-22" title="22">  ready_df &lt;-<span class="st"> </span><span class="kw">select</span>(ready_df, <span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;&lt;NA&gt;&quot;</span>, <span class="st">&quot;release_date&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">df_subset &lt;-<span class="st"> </span><span class="kw">sample</span>(ready_df, <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="kw">head</span>(df_subset)</a>
+<a class="sourceLine" id="cb13-5" title="5">)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">janvier</th>
+<th align="right">mars</th>
+<th align="right">novembre</th>
+<th align="right">Comedy</th>
+<th align="right">Mystery</th>
+<th align="right">TV Movie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>Les deux transformations ue nous venons d’appliquer sur le jeu de données initial (étendre les niveaux de la colonne <code>genres</code> et ceux de la colonne <code>release_date</code> transformée en data) font que dès maintenant le jeu de données contient 43 colonnes en total.</p>
+<p>L’idée pour le reste du travail à venir est de réduire les dimensions du jeu de données par une opération de diagonalisation du genre l’Analyse en Composante Principale (ACP) en vue d’approfondir notre connaissance du jeu de données.</p>
+<p>Le bloc de code suivant vérifie que le jeu de données ne contient plus aucune valeur manquante et le prépare à être utilisé dans une ACP.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">sum</span>(<span class="kw">is.na</span>(ready_df))</a></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>Les transformations que nous avions appliquées sur le jeu de données ont permis d’enlever les valeurs manquantes. Rappellons que les valeurs manquantes se concentraient principalement dans les colonnes non-numériques avec le plus grand ratio étant celui de la colonne <code>homepage</code>.</p>
+</div>
+<div id="lanalyse-en-composantes-principales" class="section level2">
+<h2><span class="header-section-number">4.4</span> L’Analyse en composantes principales</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">acp &lt;-<span class="st"> </span><span class="kw">PCA</span>(ready_df, <span class="dt">graph =</span> <span class="ot">FALSE</span>, <span class="dt">scale.unit =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>Les résultats de l’ACP sont enregistrés dans la variable acp créée pour cet effet. Nous voulons maintenant observer et interpréter les résultats afin d’avoir une large compréhension du jeu de données.</p>
+<p>Il est possible d’imprimer les résultats de l’ACP sur l’écran grâce à la fonction <code>summary()</code> mais procéder ainsi ne nous sera pas d’une grande utilité. Il est plus intéressant de visualiser ces résultats. C’est ce que nous ferons dans la partie visualisation.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importation-des-packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualisation-des-donnees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
