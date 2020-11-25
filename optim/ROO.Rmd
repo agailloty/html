@@ -1,0 +1,390 @@
+---
+title: "Applications de l’optimisation dans l'apprentissage automatique (machine learning) en économie cas des moindres carrés ordinaires (MCO) et des K-Means."
+author: "Axel-Cleris Gailloty"
+date: "10/11/2020"
+output: bookdown::gitbook
+---
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+library(dplyr)
+#library(kableExtra)
+data <- read.csv("../data/Salary_Data.csv")
+colnames(data) <- c("annees", "salaire")
+```
+
+
+```{r fig.height=8, fig.width=6, include=FALSE}
+knitr::opts_chunk$set(comment = NA, dpi = 300)
+library(dplyr)
+#library(kableExtra)
+data <- read.csv("../data/Salary_Data.csv")
+colnames(data) <- c("annees", "salaire")
+```
+
+
+
+# Introduction 
+
+L’économie est souvent définie comme la science de la rareté et des choix efficaces. Cette définition part du fait que les besoins des agents économiques sont illimités tandis que les ressources, elles sont limitées et rares. Il revient donc à ce que chaque agent économique définisse sa fonction objectif (fonction d’utilité pour les individus, fonction de production pour les entreprises) à optimiser afin de maximiser son gain compte tenu des moyens qu’il possède.   
+Deux branches de la science économique emploient intensivement à l’optimisation : ce sont la microéconomie et l’économétrie.  
+
+La microéconomie emploie l’optimisation en vue de construire des théories qui expliquent le comportement humain en face de la rareté, de l’incertitude et dans le cadre des contrats. 
+L’optimisation en microéconomie permet par exemple de trouver le panier optimal de biens à acheter compte tenu du revenu du consommateur. Cette approche permet par exemple de prédire le comportement du consommateur face aux variations de prix.  Elle peut aussi aider à déterminer la combinaison optimale des facteurs de production (typiquement le capital et le travail) afin de maximiser le profit ou de réduire les coûts de production. 
+
+L’économétrie de son côté utilise tout un ensemble de techniques mathématiques, statistiques et informatiques en vue de tester les théories économiques à travers la modélisation mathématique, l’estimation des paramètres et la prévision.  
+
+L’économétrie en tant que branche des sciences économiques a importé dans la science économique un très grand nombre d'outils empruntés à d'autres disciplines comme la biométrie, les statistiques. La méthode des moindres carrés ordinaires qui est aujourd'hui largement utilisé avec des variations mineures dans plusieurs modèles économétriques illustre bien le recours de l'économétrie à d'autres disciplines.   
+
+Dans ce travail nous aimerions aborder l'aspect optimisation dans deux algorithmes souvent employés dans des problèmes économiques. Ce sont les moindres carrés ordinaires et les K-Moyennes.  
+Nous commencerons par présente chaque algorithme puis nous cherchons deux applications pour chacun.  
+
+
+
+# Les moindres carrés ordinaires  
+
+## Historique de la méthode  
+
+La première publication de la méthode des moindres carrés (destinée à déterminer des quantités dans un système d'équations surdéterminé) est due à Legendre qui l'a donnée en annexe d'un ouvrage intitulé *Nouvelles méthodes pour la détermination des orbites des comètes (1805)*.      
+
+## Les moindres carrés ordinaires simples  
+
+### Formalisation  
+
+La méthode des moindres carrés utilise de l'optimisation mathématique. Il s'agit en effet de trouver un vecteur de paramètres qui minimise la **fonction objective** qui est la somme des carrés des résidus.  
+Certaines formalisations utilisent une autre fonction objective mais dans la plupart des cas nous cherchons à réduire la somme des carrés des résidus (SCR). L'intérêt de minimiser la SCR est qu'il s'agit d'une fonction convexe qui admet donc un minimum global.  
+L'optimisation se fait en utilisant la méthode de Lagrange.  
+
+Dans les lignes suivantes nous exposons les étapes utilisées pour arriver au résultat optimal.  
+
+$$\begin{align} 
+min_{\hat{a}, \hat{b}} \sum_{u_i=1}^{N} \hat{U}_{i}^2 \\ 
+ \hat{U_i} = y_i-\hat{y_i} \\
+min_{\hat{a}, \hat{b}} \sum_{u_i=1}^{N} (y_i - \hat{y_i})^2 \\   
+\end{align}$$
+
+ 
+ Nous savons que la forme finale de l'équation que nous voulons estimer est la suivante : 
+ $$\hat{y_i} = \hat{a} + \hat{b}x_i$$ 
+ 
+ Ainsi en réécrivant l'équation initiale notre programme d'optimisation est le suivant : 
+ 
+ $$min_{\hat{a}, \hat{b}} \sum_{u_i=1}^{N} (y_i - \hat{a} - \hat{b}x_i)^2$$  
+ 
+
+Nous posons les conditions de premier ordre (CPO) du Lagrangien.  
+ 
+
+$$\begin{align} \frac{\partial L}{\partial \hat{a}}= 0 \\  
+-2 \sum_{u_i=1}^{N} (y_i - \hat{a} - \hat{b}x_i) = 0  \\ 
+\sum_{u_i=1}^{N} (y_i - \hat{a} - \hat{b}x_i) = 0 \\
+\sum_{u_i=1}^{N} y - \sum_{u_i=1}^{N} \hat{a} - \sum_{ui_=1}^{N} \hat{b}x_i = 0\end{align} $$
+
+Etant donné que $\hat{a}$  est une constante, la somme allant de 1 à N est égale à $N\hat{a}$  
+
+$$\begin{align}
+\sum_{u_i=1}^{N} y_i - N\hat{a} - \hat{b} \sum_{u_i=1}^{N} x_i = 0 \\   
+N\bar{y} - N\hat{a} - \hat{b}N\bar{X} = 0 \\    
+\text{Nous pouvons diviser par N} \\
+\bar{y} - \hat{a} - \hat{b}\bar{X} = 0 \\   
+\bar{y} = \hat{a} + \hat{b}\bar{X} \\
+\end{align}$$
+
+Nous pouvons extraire $\hat{a}$     
+
+$$\hat{a} = \bar{y} - \hat{b}\bar{x}$$    
+
+Maintenant nous cherchons à exprimer $\hat{b}$  
+
+$$\begin{align}
+\sum_{i=1}^N (y_i -\hat{a}*x_i) = 0 \\
+\sum_{i=1}^N y_ix_i - \hat{a}x_i - \hat{b}x_i^2 = 0 \\
+\end{align}$$
+
+Nous remplaçons $\hat{a}$ par son expression trouvée plus haut. 
+
+$$\begin{align}
+\sum_{i=1}^N y_ix_i - (\bar{y} - \hat{b}x_i) - \hat{b}x_i^2 = 0 \\   
+\sum_{i=1}^N y_ix_i - \bar{y}x_i + \hat{b}\bar{x}x_i - \hat{b}x_i^2 = 0 \\  
+\sum_{i=1}^N (y_i - \bar{y} + \hat{b}\bar{x} - \hat{b}x_i) x_i = 0 \\   
+\sum_{i=1}^N yi - \bar{y} + \hat{b}(\bar{x} - x_i) = 0 \\ 
+\sum_{i=1}^N (y_i - \bar{y}) = -\hat{b}\sum_{i=1}^N (\bar{x} - x_i) \\   
+\hat{b} = \frac{\sum_{i=1}^N(y_i - \bar{y})}{\sum_{i=1}^N (x_i - \bar{x})} \\
+\end{align}$$  
+
+Or empiriquement nous savons que $$\sum_{i=1}^N(y_i - \bar{y})$$ et  $$\sum_{i=1}^N (x_i - \bar{x})$$ sont égales à $0$, nous allons donc multiplier le numérateur et le dénominateur par $(x_i - \bar{x})$   
+
+Nous trouvons ainsi l'expression finale de $\hat{b}$.
+
+$$\hat{b} = \frac{\sum_{i=1}^N(y_i - \bar{y})(x_i - \bar{x})}{\sum_{i=1}^N (x_i - \bar{x})^2}$$
+
+
+
+
+## Applications  
+
+### La relation entre le salaire et l'expérience professionnelle  
+
+Ayons un aperçu des 10 premières lignes des données sur lesquelles nous allons démontrer une application de la méthode d'estimation par les OLS simples. 
+
+```{r echo=FALSE}
+knitr::kable(head(data, 8))
+``` 
+
+Nous pouvons faire des graphiques pour afficher la distribution des colonnes (par des histogrammes) et la tendance avec un graphique 
+
+```{r echo=FALSE, fig.height=8, fig.width=8}
+layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE))
+plot(data$annees, data$salary, xlab = "Années expériences", ylab = "Salaires", main = "Nuage des points années expériences - salaires")
+hist(data$annees, main = "Années d'expérience", breaks = 20, xlab = "Années")
+hist(data$salaire, main = "Salaires", breaks = 20, xlab = "Salaires")
+```
+ 
+Notre but est donc d'exprimer le salaire comme une fonction des années d'expérience. Nous cherchons une relation de la forme $salaire_i = \hat{a} + \hat{b} * experiences_i + u_i$ telle que les coefficients estimés $\hat{a}$ et $\hat{b}$ minimisent la somme du carrées des erreurs.  
+ 
+ Nous appliquons les relations que nous avons trouvées dans lorsque nous avons résolu le programme d'optimisation du Lagrangien.  
+ 
+ Ainsi nous calculons d'abord $\hat{b}$ puis $\hat{a}$.  
+ 
+ La formule nous indique que $$\hat{b} = \frac{\sum_{i=1}^N(y_i - \bar{y})(x_i - \bar{x})}{\sum_{i=1}^N (x_i - \bar{x})^2}$$    
+ 
+ 
+```{r echo=FALSE}
+knitr::kable( 
+  data.frame( 
+    row.names = c("Années Expériences (X)", "Salaires (y)"), 
+    list("Sommes" = c(sum(data$annees), sum(data$salaire)),
+      "Moyennes" = c(mean(data$annees), mean(data$salaire)))
+    )
+  )
+```
+
+Nous allons donc calculer les statistiques intermédiaires en ajoutant des colonnes à notre tableau initial.  
+
+```{r echo=FALSE}
+X_bar = mean(data$annees)
+Y_bar = mean(data$salaire)
+
+data$X_X_bar <- data$annees - X_bar
+data$Y_Y_bar <- data$salaire - Y_bar 
+data$Y_Y_bar_Xi_x_bar = data$Y_Y_bar * data$X_X_bar
+data$X_X_bar_square = data$X_X_bar^2
+
+knitr::kable( head(data), 
+              col.names = c("$X$", "$Y$", "$X - \\bar{X}$", "$y-\\bar{y}$", 
+                            "$(y-\\bar{y})(X - \\bar{X})$", "$(X - \\bar{X})^2$") )
+```
+
+```{r echo=FALSE}
+b <- sum(data$Y_Y_bar_Xi_x_bar)/sum(data$X_X_bar_square) 
+a <- Y_bar - b * X_bar
+```
+
+Nous calculons les sommes de $(y-\hat{y})(X-\hat{X})$ et de $(X-\hat{X})^2$.  
+
+ 
+```{r echo=FALSE}
+knitr::kable( 
+  data.frame( 
+    row.names = c("Années Expériences (X)", "Salaires (y)", "$(y-\\hat{y})(X-\\bar{X})$", "$(X-\\bar{X})^2$"), 
+    list("Sommes" = c(sum(data$annees), sum(data$salaire), sum(data$Y_Y_bar_Xi_x_bar), sum(data$X_X_bar_square)))
+    )
+  )
+```
+
+Nous calculons donc $\hat{b}$ à partir des valeurs générées dans le tableau.  
+
+$\hat{b}$ est égal à $$ \frac{2207082.8000}{233.5547} = 9449,962$$
+
+Le coefficient de $\hat{b}$ estimé est égal à $9449,962$.    
+
+Nous pouvons maintenant déterminer la valeur de $\hat{a}$ en utilisant sa formule qui est $\hat{a} = \bar{y} - \hat{b}\bar{x}$.  
+
+Puisque nous avons déterminé $\hat{b}$, $$\hat{a} = 76003 - 9449,962*5.313$$
+Ainsi $\hat{a} = 25792,2$. 
+
+L'équation de la droite d'ajustement est de : 
+
+$$salaire = 25792,2 + 9449,96 * experiences $$
+
+Prenons un exemple pour estimer la qualité de l'ajustement de notre droite.  
+Estimons le salaire de deux individus qui ont respectivement 1 et 8 années d'expériences. 
+
+$$Salaire_1 = 25792, 2 + 9449,96 * 1 = 35242,16$$
+
+$$Salaire_8 = 25792, 2 + 9449,96 * 8 = 101 391,88 $$
+La pente de la droite est 9449,96, ce qui fait que l'expérience a un effet significatif sur le salaire.  
+
+Représentons la droite d'ajustement sur le nuage des points. 
+
+
+```{r echo=FALSE, fig.height=6, fig.width=10}
+plot(x = data$annees, y = data$salaire, xlab = "Années expériences", 
+     ylab = "Salaire", main = "Nuage de points ajusté", 
+     frame.plot = TRUE, ylim = c(20000, 125000))
+abline(a, b, col = "red")
+```
+
+Nous voyons que la droite d'ajustement passe par les points. C'est seulement cette droite qui peut minimiser la somme du carré des erreurs. C'est pour cette raison que l'estimateur des MCO est considéré comme un estimateur BLUE (Best Linear Unbiased Estimator) qui signifie le meilleur estimateur non biaisé linéaire selon le théorème de Gauss-Markov.  
+
+## Limitation des MCO simples  
+
+Bien que la méthode des MCO soit utilisée pour démontrer les relations causales qui vont au-delà des simples corrélations entre deux variables en pratique on préfère utiliser les MCO multiples où il y a plusieurs variables explicatives. Le principe des MCO multiple est le même que celui des MCO simples, la différence est qu'au lieu de chercher une droite la méthode cherche un hyperplan dans un espace à plusieurs dimensions. 
+
+# La méthode des K-Moyennes  
+
+La méthode des K-Moyennes communément appelée l'algorithme K-Means est une méthode de partitionnement des données et un problème d'optimisation combinatoire. En Machine Learning nous considérons cette méthode comme une technique d'apprentissage non supervisé. Étant donnés des points et un entier $k$, le problème est de diviser les points en $k$ groupes, souvent appelés clusters, de façon à minimiser une certaine fonction. On considère la distance d'un point à la moyenne des points de son cluster ; la fonction à minimiser est la somme des carrés de ces distances. Un cluster est un groupe de données qui partage des traits communs.   
+
+Beaucoup de problèmes économiques et sociaux utilisent l'algorithme K-Means pour segmenter, et classer des individus (personnes, collectivités, pays etc...) selon leurs similarités et tirer des conclusions et élaborer des théories.    
+
+## Généralités sur l'algorithme  
+
+La première étape dans l'implémentation de l'algorithme K-Means est de choisir une mesure de distance entre les points. Il est courant d'utiliser la distance euclidienne entre deux points. Cette distance se calcule comme suit :  
+
+$$ d_{euc} = \sqrt{\sum_{i=1}^n (x_i - y_i^2)} $$
+$x$ et $y$ sont des vecteurs de taille $n$   
+
+L'idée de base derrière le clustering k-means consiste à définir des clusters de sorte que la **variation intra-cluster totale (appelée variation totale intra-cluster) soit minimisée**. Il existe plusieurs algorithmes de k-moyennes disponibles. L'algorithme standard est l'algorithme de Hartigan-Wong (1979), qui définit la variation totale intra-cluster comme la somme des distances au carré: les distances euclidiennes entre les éléments et le centre de gravité correspondant.  
+
+$$W(C_k) = \sum_{x_i \in C_k} (x_i - \mu_k)^2 $$
+où $x_i$ est un point qui appartient au cluster $C_k$ et $\mu_k$ est la valeur moyenne des points qui sont classés dans ce cluster.  
+
+Chaque observation est donc assignée à un cluster de telle manière que la somme des carrés de la distance de l'observation par rapport au centre du cluster $\mu_k$ est minimisée.  Nous définissons la variation totale intra-cluster comme suit:  
+
+$$ \sum_{k=1}^k W(C_k) = \sum_{k=1}^k \sum_{x_i \in C_k} (x_i - \mu_k)^2 $$
+La variation totale intra-cluster mesure la fiabilité du clustering et c'est elle que le programme d'optimisation cherche à minimiser. Plus elle est petite mieux est la fiabilité.  
+
+La résolution de ce programme se fait via l'algorithme suivant :  
+L'algorithme K-means peut être résumé comme suit:  
+
+- Spécifiez le nombre de clusters (K) à créer (par l'analyste)
+- Sélectionnez au hasard k objets de l'ensemble de données comme centres ou moyens de cluster initiaux
+- Attribuer à chaque observation le centre de gravité le plus proche, en fonction de la distance euclidienne entre l'objet et le centre de gravité  
+- Pour chacun des k clusters, mettre à jour le centre de gravité du cluster en calculant les nouvelles valeurs moyennes de tous les points de données du cluster. Le centre de gravité d'un $k^{ème}$ cluster est un vecteur de longueur $p$ contenant les moyennes de toutes les variables pour les observations du $k^{ème}$ cluster; $p$ est le nombre de variables.  
+- Minimiser itérativement le total dans la somme des carrés. Autrement dit, répétez les étapes 3 et 4 jusqu'à ce que les attributions de cluster cessent de changer ou que le nombre maximal d'itérations soit atteint.   
+
+La résolution de cet algorithme pourrait être fastidieux manuellement donc nous allons recourir à une approche informatique en utilisant le langage de programmation R dans lequel cet algorithme est implémenté de manière efficiente.  
+
+## Applications 
+
+Nous voulons donc démontrer par un exemple l'utilité de cet algorithme pour des questions économiques. Nous allons nous intéresser à la macroéconomie mondiale. La Banque mondiale, dans son programme **World Development Indicators** a créé plus de 3000 indicateurs pour mesurer le niveau de développement des pays et territoires du monde. Ces données sont gratuitement disponibles sur leur site [World Development Indicator | Databank](https://databank.worldbank.org/source/world-development-indicators). 
+
+Pour l'application des K-Means, j'ai sélectionné les variables suivantes :  
+
+- Le pourcentage de la population ayant accès aux technologies de communication (TELECOM)
+- La part de la population active qui travaille dans le secteur agricole (EMPLOIAGRIC)
+- La croissance du Produit Intérieur Brut (PIB) (PIBCROIS)
+- Le PIB par habitant (PIBCAPITA)
+- Le pourcentage du PIB consacré aux dépenses publiques de l'Etat (DEPENSESPUB)
+- La superficie du pays en $Km^2$ (SUPERFICIE)
+- L'espérance de vie (ESPERANCE)
+- Le taux de fertilité des femmes (nombre moyen d'enfants par femme en âge de procréer) (FERTILITE)
+- La part du revenu national épargné (EPARGNE)
+
+Il y a 142 observations dans la base de données, qui représentent des pays et territoires.  
+
+Avant d'appliquer l'algorithme nous avons choisi de normaliser chaque variable en soustrayant sa moyenne puis en la divisant par son écart-type. Le but de cette transformation est de donner à chaque variable un poids équivalent dans calcul des distances entre les points selon la distance euclidienne. Par exemple le PIB/habitant peut aller jusqu'à plus de 50000 dollars tandis que la croissance du PIB est souvent inférieure à 10%. Normaliser les variables revient donc à homogénéiser chaque variable et enlève l'unité de mesure.   
+
+
+```{r echo=FALSE}
+df_wb <- readxl::read_excel("../data/Data_Extract_From_World_Development_Indicators.xlsx", na = "..")
+```
+
+```{r echo=FALSE}
+df_wb_2018 <- filter(df_wb, Time == 2018)
+finalized_df <- df_wb_2018[,sapply(df_wb_2018, function(x) sum(is.na(x))) < 65] %>% na.omit() %>% select(-c(Time, `Time Code`, `Country Code`)) %>%
+  slice(1:143) %>%
+  filter(`Country Name` != "West Bank and Gaza")
+colnames(finalized_df) <- c("PAYS", "TELECOM", "EMPLOIAGRIC", "PIBCROIS", "PIBCAPITA", "DEPENSESPUB", "SUPERFICIE", "ESPERANCEVIE", "FERTILITE", "EPARGNE")
+matrix_data_scaled = sapply(finalized_df[, 2:ncol(finalized_df)], scale)
+```
+
+Nous commençons par une première résolution de l'algorithme en choisissant $k=4$, l'algorithme de Hartigan-Wong (que nous avons décrit plus haut) puis le nombre maximal d'itération à 15.  
+
+```{r echo=TRUE}
+set.seed(123)
+res_kmeans <- kmeans(matrix_data_scaled, centers = 4, 
+                     algorithm = "Hartigan-Wong",
+                     iter.max = 15)
+```
+
+Voici donc les résultats : 
+
+```{r}
+str(res_kmeans)
+```
+
+L'algorithme a convergé au bout de 4 itérations, c'est ce qu'indique l'argument `iter`. La somme totale des carrés des distances par rapport au centre de chaque cluster est de 1269, ce qu'indique l'argument `totss`.  
+
+La variation individuelle intra-classe est représentée par le résultat `withinss`. 
+La variation totale intra-cluster est égale à 703, c'est la somme des variations individuelles. Nous ne pouvons pas dire si ce nombre est grand ou petit car il n'existe pas un indicateur pour exprimer la fiabilité en pourcentage. Mais ce premier résultat nous sert de référence. Les praticiens de cet algorithme utilisent souvent une approche itérative qui consiste à choisir un vecteur de paramètres $k$ qu'on donne à l'algorithme pour qu'il partitionne les données, puis le nombre $k$ qui donne la moindre variable totale intra-classe sera retenue.  
+
+Affichons comment l'algorithme a partitionné les pays selon les clusters.
+
+
+```{r echo=FALSE}
+options(dplyr.summarise.inform = FALSE)
+data.frame(cluster = res_kmeans$cluster, pays = finalized_df$PAYS) %>%
+  group_by(cluster) %>%
+  summarise(Pays = paste(pays, collapse =  ",  ")) %>% ungroup() %>%
+  knitr::kable(col.names = c("Clusters", "Pays"))
+```
+
+Nous ne pouvons pas dire si ces résultats sont les meilleurs mais nous voyons déjà que l'algorithme a reproduit la réalité. En effet nous voyons par exemple que presque tous les pays se trouvent dans le cluster 3, ce qui montre que ces pays sont plus homogènes au regard des variables que nous avons choisies.  
+
+Pour mieux apprécier la distance entre les différents clusters nous pouvons procéder à la visualisation des centres. Or nos variables sont au nombre de 9, il est ainsi impossible de représenter un graphique à 9 dimensions pour observer les clusters. C'est pour cette raison que nous allons appliquer une transformation appelée la transformation de Karhunen–Loève (KLT) qui consiste à réduire la dimension de notre matrice en passant d'une matrice $m, n =(144, 9)$ à une matrice $m, p = (144, 2)$ où $m$ représente le nombre d'individus (observations) et $n$ le nombre de variables. Les variables synthétiques $p <n$ résument donc la variabilité des 9 variables initiales en projettant les données dans une dimension $p$ qui maximise la variance. Cette méthode s'appelle l'analyse en composantes principales [^1].  
+
+[^1]: L'ACP est aussi très utilisé en économie. Un exemple intéressant de cette méthode est en data mining où nous la méthode est utilisée pour syntétiser plusieurs variables qui en des composantes qui sont des combinaisons linéaires des variables initiales.
+
+```{r echo=FALSE, fig.height=8, fig.width=12, message=FALSE, warning=FALSE}
+library(cluster)
+clusplot(matrix_data_scaled, res_kmeans$cluster, color=TRUE, shade=TRUE, 
+         labels=2, lines=0)
+```
+
+Les deux variables synthétiques (ou composantes principales) nommées **Component 1** et **Component 2** résument donc à hauteur 56,17% la variance totale des 9 variables initiales. Ainsi sur ce graphique qui représente chaque graphe par un ellipse gaussien nous voyons que les clusters sont bien distincts les uns des autres. Il y a quelques chevauchements entre les certains clusters mais cela est due à la réduction de la dimensionalité.
+
+
+# Conclusion  
+
+Au travers de ce travail nous avons réalisé la puissance et l'utilité des méthodes d'optimisation. L'optimisation est une branche des mathématiques cherchant à modéliser, à analyser et à résoudre analytiquement ou numériquement les problèmes qui consistent à minimiser ou maximiser une fonction sur un ensemble.
+
+L’optimisation joue un rôle important en recherche opérationnelle (domaine à la frontière entre l'informatique, les mathématiques et l'économie), dans les mathématiques appliquées (fondamentales pour l'industrie et l'ingénierie), en analyse et en analyse numérique, en statistique pour l’estimation du maximum de vraisemblance d’une distribution, pour la recherche de stratégies dans le cadre de la théorie des jeux, ou encore en théorie du contrôle et de la commande.  
+
+Nous avons pu, dans ce projet, exploiter quelques méthodes d'optimisation et de recherches opérationnelles pour résoudre des problèmes très complexes. Nous observons qu'il existe des méthodes qui se basent sur une approche algébrique claire qui établit par une solution empiriquement testée des étapes pour trouver les points optimaux, c'est le cas de la méthode des moindres carrés ordinaires. Toutefois certaines approches de l'optimisation se basent sur des algorithmes qui permettent de déterminer une solution optimale via des itérations et des ajustements, c'est le cas des K-Moyennes.  
+
+
+# Bibliographie   
+
+
+
+Ce travail a été réalisé en prenant en compte la reproductibilité des résultats. Le code source de ce travail peut être consulté à travers ce [lien](https://github.com/agailloty/Panel_Econometrics/blob/main/ROO/ROO.Rmd).  
+
+  
+Chambers, J. M. (1992) Linear models. Chapter 4 of Statistical Models in S eds J. M. Chambers and T. J. Hastie, Wadsworth & Brooks/Cole. 
+
+Forgy, E. W. (1965). Cluster analysis of multivariate data: efficiency vs interpretability of classifications. Biometrics, 21, 768–769.  
+
+Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020).
+  dplyr: A Grammar of Data Manipulation. R package version 1.0.2.
+  https://CRAN.R-project.org/package=dplyr 
+
+Hartigan, J. A. and Wong, M. A. (1979). Algorithm AS 136: A K-means clustering algorithm. Applied Statistics, 28, 100–108. doi: 10.2307/2346830. 
+
+Maechler, M., Rousseeuw, P., Struyf, A., Hubert, M., Hornik, K.(2019).  cluster:
+  Cluster Analysis Basics and Extensions. R package version 2.1.0. 
+  
+R Core Team (2020). R: A language and environment for statistical
+  computing. R Foundation for Statistical Computing, Vienna, Austria.
+  URL https://www.R-project.org/. 
+
+Wilkinson, G. N. and Rogers, C. E. (1973). Symbolic descriptions of factorial models for analysis of variance. Applied Statistics, 22, 392–399. doi: 10.2307/2346786. 
+  
+Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In
+  Victoria Stodden, Friedrich Leisch and Roger D. Peng, editors, Implementing
+  Reproducible Computational Research. Chapman and Hall/CRC. ISBN 978-1466561595
+
+
+
+

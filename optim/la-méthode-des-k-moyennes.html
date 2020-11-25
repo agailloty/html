@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 La méthode des K-Moyennes | Applications de l’optimisation dans l’apprentissage automatique (machine learning) en économie cas des moindres carrés ordinaires (MCO) et des K-Means.</title>
+  <meta name="description" content="3 La méthode des K-Moyennes | Applications de l’optimisation dans l’apprentissage automatique (machine learning) en économie cas des moindres carrés ordinaires (MCO) et des K-Means." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 La méthode des K-Moyennes | Applications de l’optimisation dans l’apprentissage automatique (machine learning) en économie cas des moindres carrés ordinaires (MCO) et des K-Means." />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 La méthode des K-Moyennes | Applications de l’optimisation dans l’apprentissage automatique (machine learning) en économie cas des moindres carrés ordinaires (MCO) et des K-Means." />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+
+
+<meta name="date" content="2020-10-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="les-moindres-carrés-ordinaires.html"/>
+<link rel="next" href="conclusion.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="les-moindres-carrés-ordinaires.html"><a href="les-moindres-carrés-ordinaires.html"><i class="fa fa-check"></i><b>2</b> Les moindres carrés ordinaires</a><ul>
+<li class="chapter" data-level="2.1" data-path="les-moindres-carrés-ordinaires.html"><a href="les-moindres-carrés-ordinaires.html#historique-de-la-méthode"><i class="fa fa-check"></i><b>2.1</b> Historique de la méthode</a></li>
+<li class="chapter" data-level="2.2" data-path="les-moindres-carrés-ordinaires.html"><a href="les-moindres-carrés-ordinaires.html#les-moindres-carrés-ordinaires-simples"><i class="fa fa-check"></i><b>2.2</b> Les moindres carrés ordinaires simples</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="les-moindres-carrés-ordinaires.html"><a href="les-moindres-carrés-ordinaires.html#formalisation"><i class="fa fa-check"></i><b>2.2.1</b> Formalisation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="les-moindres-carrés-ordinaires.html"><a href="les-moindres-carrés-ordinaires.html#applications"><i class="fa fa-check"></i><b>2.3</b> Applications</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="les-moindres-carrés-ordinaires.html"><a href="les-moindres-carrés-ordinaires.html#la-relation-entre-le-salaire-et-lexpérience-professionnelle"><i class="fa fa-check"></i><b>2.3.1</b> La relation entre le salaire et l’expérience professionnelle</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="les-moindres-carrés-ordinaires.html"><a href="les-moindres-carrés-ordinaires.html#limitation-des-mco-simples"><i class="fa fa-check"></i><b>2.4</b> Limitation des MCO simples</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="la-méthode-des-k-moyennes.html"><a href="la-méthode-des-k-moyennes.html"><i class="fa fa-check"></i><b>3</b> La méthode des K-Moyennes</a><ul>
+<li class="chapter" data-level="3.1" data-path="la-méthode-des-k-moyennes.html"><a href="la-méthode-des-k-moyennes.html#généralités-sur-lalgorithme"><i class="fa fa-check"></i><b>3.1</b> Généralités sur l’algorithme</a></li>
+<li class="chapter" data-level="3.2" data-path="la-méthode-des-k-moyennes.html"><a href="la-méthode-des-k-moyennes.html#applications-1"><i class="fa fa-check"></i><b>3.2</b> Applications</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>4</b> Conclusion</a></li>
+<li class="chapter" data-level="5" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>5</b> Bibliographie</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applications de l’optimisation dans l’apprentissage automatique (machine learning) en économie cas des moindres carrés ordinaires (MCO) et des K-Means.</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="la-méthode-des-k-moyennes" class="section level1">
+<h1><span class="header-section-number">3</span> La méthode des K-Moyennes</h1>
+<p>La méthode des K-Moyennes communément appelée l’algorithme K-Means est une méthode de partitionnement des données et un problème d’optimisation combinatoire. En Machine Learning nous considérons cette méthode comme une technique d’apprentissage non supervisé. Étant donnés des points et un entier <span class="math inline">\(k\)</span>, le problème est de diviser les points en <span class="math inline">\(k\)</span> groupes, souvent appelés clusters, de façon à minimiser une certaine fonction. On considère la distance d’un point à la moyenne des points de son cluster ; la fonction à minimiser est la somme des carrés de ces distances. Un cluster est un groupe de données qui partage des traits communs.</p>
+<p>Beaucoup de problèmes économiques et sociaux utilisent l’algorithme K-Means pour segmenter, et classer des individus (personnes, collectivités, pays etc…) selon leurs similarités et tirer des conclusions et élaborer des théories.</p>
+<div id="généralités-sur-lalgorithme" class="section level2">
+<h2><span class="header-section-number">3.1</span> Généralités sur l’algorithme</h2>
+<p>La première étape dans l’implémentation de l’algorithme K-Means est de choisir une mesure de distance entre les points. Il est courant d’utiliser la distance euclidienne entre deux points. Cette distance se calcule comme suit :</p>
+<p><span class="math display">\[ d_{euc} = \sqrt{\sum_{i=1}^n (x_i - y_i^2)} \]</span>
+<span class="math inline">\(x\)</span> et <span class="math inline">\(y\)</span> sont des vecteurs de taille <span class="math inline">\(n\)</span></p>
+<p>L’idée de base derrière le clustering k-means consiste à définir des clusters de sorte que la <strong>variation intra-cluster totale (appelée variation totale intra-cluster) soit minimisée</strong>. Il existe plusieurs algorithmes de k-moyennes disponibles. L’algorithme standard est l’algorithme de Hartigan-Wong (1979), qui définit la variation totale intra-cluster comme la somme des distances au carré: les distances euclidiennes entre les éléments et le centre de gravité correspondant.</p>
+<p><span class="math display">\[W(C_k) = \sum_{x_i \in C_k} (x_i - \mu_k)^2 \]</span>
+où <span class="math inline">\(x_i\)</span> est un point qui appartient au cluster <span class="math inline">\(C_k\)</span> et <span class="math inline">\(\mu_k\)</span> est la valeur moyenne des points qui sont classés dans ce cluster.</p>
+<p>Chaque observation est donc assignée à un cluster de telle manière que la somme des carrés de la distance de l’observation par rapport au centre du cluster <span class="math inline">\(\mu_k\)</span> est minimisée. Nous définissons la variation totale intra-cluster comme suit:</p>
+<p><span class="math display">\[ \sum_{k=1}^k W(C_k) = \sum_{k=1}^k \sum_{x_i \in C_k} (x_i - \mu_k)^2 \]</span>
+La variation totale intra-cluster mesure la fiabilité du clustering et c’est elle que le programme d’optimisation cherche à minimiser. Plus elle est petite mieux est la fiabilité.</p>
+<p>La résolution de ce programme se fait via l’algorithme suivant :<br />
+L’algorithme K-means peut être résumé comme suit:</p>
+<ul>
+<li>Spécifiez le nombre de clusters (K) à créer (par l’analyste)</li>
+<li>Sélectionnez au hasard k objets de l’ensemble de données comme centres ou moyens de cluster initiaux</li>
+<li>Attribuer à chaque observation le centre de gravité le plus proche, en fonction de la distance euclidienne entre l’objet et le centre de gravité<br />
+</li>
+<li>Pour chacun des k clusters, mettre à jour le centre de gravité du cluster en calculant les nouvelles valeurs moyennes de tous les points de données du cluster. Le centre de gravité d’un <span class="math inline">\(k^{ème}\)</span> cluster est un vecteur de longueur <span class="math inline">\(p\)</span> contenant les moyennes de toutes les variables pour les observations du <span class="math inline">\(k^{ème}\)</span> cluster; <span class="math inline">\(p\)</span> est le nombre de variables.<br />
+</li>
+<li>Minimiser itérativement le total dans la somme des carrés. Autrement dit, répétez les étapes 3 et 4 jusqu’à ce que les attributions de cluster cessent de changer ou que le nombre maximal d’itérations soit atteint.</li>
+</ul>
+<p>La résolution de cet algorithme pourrait être fastidieux manuellement donc nous allons recourir à une approche informatique en utilisant le langage de programmation R dans lequel cet algorithme est implémenté de manière efficiente.</p>
+</div>
+<div id="applications-1" class="section level2">
+<h2><span class="header-section-number">3.2</span> Applications</h2>
+<p>Nous voulons donc démontrer par un exemple l’utilité de cet algorithme pour des questions économiques. Nous allons nous intéresser à la macroéconomie mondiale. La Banque mondiale, dans son programme <strong>World Development Indicators</strong> a créé plus de 3000 indicateurs pour mesurer le niveau de développement des pays et territoires du monde. Ces données sont gratuitement disponibles sur leur site <a href="https://databank.worldbank.org/source/world-development-indicators">World Development Indicator | Databank</a>.</p>
+<p>Pour l’application des K-Means, j’ai sélectionné les variables suivantes :</p>
+<ul>
+<li>Le pourcentage de la population ayant accès aux technologies de communication (TELECOM)</li>
+<li>La part de la population active qui travaille dans le secteur agricole (EMPLOIAGRIC)</li>
+<li>La croissance du Produit Intérieur Brut (PIB) (PIBCROIS)</li>
+<li>Le PIB par habitant (PIBCAPITA)</li>
+<li>Le pourcentage du PIB consacré aux dépenses publiques de l’Etat (DEPENSESPUB)</li>
+<li>La superficie du pays en <span class="math inline">\(Km^2\)</span> (SUPERFICIE)</li>
+<li>L’espérance de vie (ESPERANCE)</li>
+<li>Le taux de fertilité des femmes (nombre moyen d’enfants par femme en âge de procréer) (FERTILITE)</li>
+<li>La part du revenu national épargné (EPARGNE)</li>
+</ul>
+<p>Il y a 142 observations dans la base de données, qui représentent des pays et territoires.</p>
+<p>Avant d’appliquer l’algorithme nous avons choisi de normaliser chaque variable en soustrayant sa moyenne puis en la divisant par son écart-type. Le but de cette transformation est de donner à chaque variable un poids équivalent dans calcul des distances entre les points selon la distance euclidienne. Par exemple le PIB/habitant peut aller jusqu’à plus de 50000 dollars tandis que la croissance du PIB est souvent inférieure à 10%. Normaliser les variables revient donc à homogénéiser chaque variable et enlève l’unité de mesure.</p>
+<p>Nous commençons par une première résolution de l’algorithme en choisissant <span class="math inline">\(k=4\)</span>, l’algorithme de Hartigan-Wong (que nous avons décrit plus haut) puis le nombre maximal d’itération à 15.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">res_kmeans &lt;-<span class="st"> </span><span class="kw">kmeans</span>(matrix_data_scaled, <span class="dt">centers =</span> <span class="dv">4</span>, </a>
+<a class="sourceLine" id="cb1-3" title="3">                     <span class="dt">algorithm =</span> <span class="st">&quot;Hartigan-Wong&quot;</span>,</a>
+<a class="sourceLine" id="cb1-4" title="4">                     <span class="dt">iter.max =</span> <span class="dv">15</span>)</a></code></pre></div>
+<p>Voici donc les résultats :</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">str</span>(res_kmeans)</a></code></pre></div>
+<pre><code>List of 9
+ $ cluster     : int [1:142] 3 2 3 4 2 4 4 2 2 4 ...
+ $ centers     : num [1:4, 1:9] -0.3817 -0.2067 -0.0283 0.3825 0.0255 ...
+  ..- attr(*, &quot;dimnames&quot;)=List of 2
+  .. ..$ : chr [1:4] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot;
+  .. ..$ : chr [1:9] &quot;TELECOM&quot; &quot;EMPLOIAGRIC&quot; &quot;PIBCROIS&quot; &quot;PIBCAPITA&quot; ...
+ $ totss       : num 1269
+ $ withinss    : num [1:4] 92.2 178.5 130.1 302.5
+ $ tot.withinss: num 703
+ $ betweenss   : num 566
+ $ size        : int [1:4] 10 59 29 44
+ $ iter        : int 4
+ $ ifault      : int 0
+ - attr(*, &quot;class&quot;)= chr &quot;kmeans&quot;</code></pre>
+<p>L’algorithme a convergé au bout de 4 itérations, c’est ce qu’indique l’argument <code>iter</code>. La somme totale des carrés des distances par rapport au centre de chaque cluster est de 1269, ce qu’indique l’argument <code>totss</code>.</p>
+<p>La variation individuelle intra-classe est représentée par le résultat <code>withinss</code>.
+La variation totale intra-cluster est égale à 703, c’est la somme des variations individuelles. Nous ne pouvons pas dire si ce nombre est grand ou petit car il n’existe pas un indicateur pour exprimer la fiabilité en pourcentage. Mais ce premier résultat nous sert de référence. Les praticiens de cet algorithme utilisent souvent une approche itérative qui consiste à choisir un vecteur de paramètres <span class="math inline">\(k\)</span> qu’on donne à l’algorithme pour qu’il partitionne les données, puis le nombre <span class="math inline">\(k\)</span> qui donne la moindre variable totale intra-classe sera retenue.</p>
+<p>Affichons comment l’algorithme a partitionné les pays selon les clusters.</p>
+<table>
+<colgroup>
+<col width="1%" />
+<col width="98%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">Clusters</th>
+<th align="left">Pays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Eswatini, Haiti, Iraq, Lebanon, Lesotho, Liberia, Namibia, Nicaragua, South Africa, Timor-Leste</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Albania, Armenia, Azerbaijan, Bahamas, The, Bangladesh, Belarus, Belize, Bhutan, Bolivia, Bosnia and Herzegovina, Botswana, Bulgaria, Cabo Verde, Cambodia, Chile, Colombia, Costa Rica, Croatia, Dominican Republic, Ecuador, Egypt, Arab Rep., El Salvador, Georgia, Greece, Guatemala, Guyana, Honduras, India, Indonesia, Jamaica, Jordan, Kazakhstan, Kyrgyz Republic, Latvia, Lithuania, Malaysia, Mauritius, Mexico, Moldova, Mongolia, Montenegro, Morocco, Myanmar, Nepal, North Macedonia, Panama, Paraguay, Peru, Philippines, Poland, Romania, Serbia, Sri Lanka, Thailand, Tunisia, Turkey, Ukraine, Uruguay, Uzbekistan</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Afghanistan, Angola, Benin, Burkina Faso, Burundi, Cameroon, Comoros, Congo, Dem. Rep., Cote d’Ivoire, Ethiopia, Gambia, The, Ghana, Guinea, Guinea-Bissau, Kenya, Madagascar, Malawi, Mali, Mauritania, Mozambique, Niger, Nigeria, Pakistan, Rwanda, Senegal, Sierra Leone, Togo, Uganda, Zambia</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">Argentina, Australia, Austria, Bahrain, Belgium, Brazil, Brunei Darussalam, Canada, China, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Hong Kong SAR, China, Hungary, Iceland, Ireland, Israel, Italy, Japan, Korea, Rep., Kuwait, Luxembourg, Macao SAR, China, Malta, Netherlands, New Zealand, Norway, Oman, Portugal, Qatar, Russian Federation, Saudi Arabia, Singapore, Slovak Republic, Slovenia, Spain, Sweden, Switzerland, United Kingdom, United States</td>
+</tr>
+</tbody>
+</table>
+<p>Nous ne pouvons pas dire si ces résultats sont les meilleurs mais nous voyons déjà que l’algorithme a reproduit la réalité. En effet nous voyons par exemple que presque tous les pays se trouvent dans le cluster 3, ce qui montre que ces pays sont plus homogènes au regard des variables que nous avons choisies.</p>
+<p>Pour mieux apprécier la distance entre les différents clusters nous pouvons procéder à la visualisation des centres. Or nos variables sont au nombre de 9, il est ainsi impossible de représenter un graphique à 9 dimensions pour observer les clusters. C’est pour cette raison que nous allons appliquer une transformation appelée la transformation de Karhunen–Loève (KLT) qui consiste à réduire la dimension de notre matrice en passant d’une matrice <span class="math inline">\(m, n =(144, 9)\)</span> à une matrice <span class="math inline">\(m, p = (144, 2)\)</span> où <span class="math inline">\(m\)</span> représente le nombre d’individus (observations) et <span class="math inline">\(n\)</span> le nombre de variables. Les variables synthétiques <span class="math inline">\(p &lt;n\)</span> résument donc la variabilité des 9 variables initiales en projettant les données dans une dimension <span class="math inline">\(p\)</span> qui maximise la variance. Cette méthode s’appelle l’analyse en composantes principales <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p><img src="ROO_files/figure-html/unnamed-chunk-15-1.png" width="3600" /></p>
+<p>Les deux variables synthétiques (ou composantes principales) nommées <strong>Component 1</strong> et <strong>Component 2</strong> résument donc à hauteur 56,17% la variance totale des 9 variables initiales. Ainsi sur ce graphique qui représente chaque graphe par un ellipse gaussien nous voyons que les clusters sont bien distincts les uns des autres. Il y a quelques chevauchements entre les certains clusters mais cela est due à la réduction de la dimensionalité.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>L’ACP est aussi très utilisé en économie. Un exemple intéressant de cette méthode est en data mining où nous la méthode est utilisée pour syntétiser plusieurs variables qui en des composantes qui sont des combinaisons linéaires des variables initiales.<a href="la-méthode-des-k-moyennes.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="les-moindres-carrés-ordinaires.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
