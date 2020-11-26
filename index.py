@@ -1,12 +1,11 @@
 import markdown, os, json
 
-files = os.listdir()
-
-
 def gen_markdown():
     files = set(os.listdir()) - {".vscode", "index.py", "css",
     "index.html", ".git", "REAMDE.md"}
-    links = [f" - [{path}]({path})" for path in files]
+    titles = [" ".join(doc.split("-")).title() for doc in files]
+    titles = [doc.split(".")[0] for doc in titles]
+    links = [f" - [{title}]({path})" for (path, title) in zip(files, titles)]
     return " \n ".join(links)
 
 
