@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Application | Modèle de comptage sur les étoiles de l’Euromillion</title>
+  <meta name="description" content="3 Application | Modèle de comptage sur les étoiles de l’Euromillion" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Application | Modèle de comptage sur les étoiles de l’Euromillion" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Application | Modèle de comptage sur les étoiles de l’Euromillion" />
+  
+  
+  
+
+<meta name="author" content="Axel-Cleris Gailloty" />
+<meta name="author" content="Hamet Niang" />
+
+
+<meta name="date" content="2021-02-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="modèle-de-comptage.html"/>
+<link rel="next" href="estimation-de-régression-de-poisson-avec-glm.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#description-de-leuromillion"><i class="fa fa-check"></i><b>1.1</b> Description de l’Euromillion</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#description-des-étoiles"><i class="fa fa-check"></i><b>1.2</b> Description des étoiles</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="modèle-de-comptage.html"><a href="modèle-de-comptage.html"><i class="fa fa-check"></i><b>2</b> Modèle de comptage</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="modèle-de-comptage.html"><a href="modèle-de-comptage.html#la-régression-de-poisson"><i class="fa fa-check"></i><b>2.1</b> La régression de Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="application.html"><a href="application.html"><i class="fa fa-check"></i><b>3</b> Application</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="application.html"><a href="application.html#les-hypothèses-de-recherche"><i class="fa fa-check"></i><b>3.1</b> Les hypothèses de recherche</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="application.html"><a href="application.html#choix-des-variables"><i class="fa fa-check"></i><b>3.1.1</b> Choix des variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="application.html"><a href="application.html#statistiques-et-visualisations"><i class="fa fa-check"></i><b>3.2</b> Statistiques et visualisations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="application.html"><a href="application.html#evolution-des-grilles-jouées"><i class="fa fa-check"></i><b>3.2.1</b> Evolution des grilles jouées</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="estimation-de-régression-de-poisson-avec-glm.html"><a href="estimation-de-régression-de-poisson-avec-glm.html"><i class="fa fa-check"></i><b>4</b> Estimation de régression de Poisson avec glm</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="estimation-de-régression-de-poisson-avec-glm.html"><a href="estimation-de-régression-de-poisson-avec-glm.html#interprétation-des-coefficients"><i class="fa fa-check"></i><b>4.1</b> Interprétation des coefficients</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="estimation-de-régression-de-poisson-avec-glm.html"><a href="estimation-de-régression-de-poisson-avec-glm.html#significativité-des-coefficients-estimés"><i class="fa fa-check"></i><b>4.1.1</b> Significativité des coefficients estimés</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="estimation-de-régression-de-poisson-avec-glm.html"><a href="estimation-de-régression-de-poisson-avec-glm.html#interprétation-des-coefficients-1"><i class="fa fa-check"></i><b>4.2</b> Interprétation des coefficients</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="estimation-de-régression-de-poisson-avec-glm.html"><a href="estimation-de-régression-de-poisson-avec-glm.html#calcul-du-pseudo-r2"><i class="fa fa-check"></i><b>4.2.1</b> Calcul du pseudo-R2</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="estimation-de-régression-de-poisson-avec-glm.html"><a href="estimation-de-régression-de-poisson-avec-glm.html#estimation-des-probabilités-doccurence"><i class="fa fa-check"></i><b>4.3</b> Estimation des probabilités d’occurence</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="evaluation-de-lestimation.html"><a href="evaluation-de-lestimation.html"><i class="fa fa-check"></i><b>5</b> Evaluation de l’estimation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="evaluation-de-lestimation.html"><a href="evaluation-de-lestimation.html#la-distribution-des-résidus"><i class="fa fa-check"></i><b>5.1</b> La distribution des résidus</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="evaluation-de-lestimation.html"><a href="evaluation-de-lestimation.html#root-mean-square-percent-error-rmspe"><i class="fa fa-check"></i><b>5.1.1</b> Root Mean Square Percent Error (RMSPE)</a></li>
+<li class="chapter" data-level="5.1.2" data-path="evaluation-de-lestimation.html"><a href="evaluation-de-lestimation.html#matrice-de-confusion"><i class="fa fa-check"></i><b>5.1.2</b> Matrice de confusion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="chapter" data-level="7" data-path="bibliographie.html"><a href="bibliographie.html"><i class="fa fa-check"></i><b>7</b> Bibliographie</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modèle de comptage sur les étoiles de l’Euromillion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="application" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Application</h1>
+<p>Nous appliquons maintenant cette procédure que nous venons de décrire à notre travail.
+Nous voulons modéliser le nombre de fois que la somme des étoiles est supérieure à chacune des valeurs des boules B1 à B5.</p>
+<p><span class="math inline">\(y\)</span> qui représente le nombre d’occurences est compris entre 0 et 5.
+Lorsque le nombre est égal à 0 alors toutes les boules tirées sont supérieure à 24. Lorsque <span class="math inline">\(y=1\)</span> alors une boule tirée est inférieure à 24 et ainsi de suite jusqu’à ce que <span class="math inline">\(y=5\)</span> qui signifie que toutes les boules tirées sont inférieures à 24.</p>
+<p>Nous affichons une distribution d’occurence de ces évènements.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="application.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(Y)</span></code></pre></div>
+<pre><code>Y
+ 0  1  2  3  4 
+49 65 42 18  1 </code></pre>
+<p>Selon ce tableau, dans 49 cas sur 175 toutes les boules tirées sont supérieures à la somme des étoiles, c’est-à-dire supérieures à 24. Dans 65 cas une boule tirée est inférieure à 24, dans 42 cas deux boules tirées sont inférieures à 24, dans 18, trois boules tirées sont inférieures à 24 et dans un seul cas seulement 4 boules tirées sont inférieures à 24. Aucun cas ne mentionne le fait que toutes les 5 boules tirées sont inférieures à 24.<br />
+C’est sur ce comptage que nous allons faire notre modélisation.</p>
+<p>Mais avant de passer à la modélisation, nous estimons qu’il est important de choisir des variables exogènes au modèle, de présenter et de faire des statistiques descriptives sur ces variables exogènes en lien avec la distribution de la variable endogène.</p>
+<p>Comme nous l’avons décrit au début de cette étude, le jeu de donnée contient 54 colonnes. On pourrait inclure toutes ces variables dans le modèle, nous avons assez de dégré de liberté de le faire puisque le nombre d’observation est de 175 soit plus de trois fois le nombre de variables. Toutefois nous cherchons un modèle simple à interpréter. Aussi inclure beaucoup trop de variables dans un modèles risque d’introduire des biais dans l’analyse. Parmi ces biais nous pouvons compter :</p>
+<ul>
+<li>La multicolinéarité : c’est lorsque plusieurs variables prédisent la même chose. c’est lorsque ces variables sont très corrélés voire parfaitement corrélées. Un exemple c’est le jour du tirage. Le tirage de l’Euromillion se fait deux fois par semaine : le mardi et le vendredi. Si nous incluons dans le modèle le jour de tirage alors vendredi est un prédicteur parfait de mardi.</li>
+<li>Le biais de surapprentissage (overfitting) : c’est lorsque le modèle apprend trop les caractéristiques particulières du présent échantillon si bien qu’il est difficile de généraliser le résultat à d’autres échantillons.</li>
+</ul>
+<div id="les-hypothèses-de-recherche" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Les hypothèses de recherche</h2>
+<p>Il convient de présenter les hypothèses que nous aimerions tester ici.</p>
+<ul>
+<li>Le nombre de gagnants au range 12 millions d’euros n’a pas d’effets sur la somme des étoiles.</li>
+<li>La somme de toutes les boules a un effet négatif sur le nombre d’occurence.</li>
+<li>Le nombre de boules jouées n’a pas d’effet sur le nombre d’occurences</li>
+<li>Il y a plus de grilles jouées les mardis que les vendredis</li>
+<li>Lorsque la première étoile est supérieure à la deuxième alors toute chose égale par ailleurs le nombre d’occurences est supérieure à 0.</li>
+</ul>
+<div id="choix-des-variables" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Choix des variables</h3>
+<p>Pour ces raisons voici la liste des variables que nous choisissons :</p>
+<ul>
+<li>Somme des boules B1 à B5</li>
+<li>Nombre de gagnants</li>
+<li>Nombre de boules jouées</li>
+<li>Première boule supérieure à la deuxième boule (variable binaire indicatrice)</li>
+<li>Le jour du tirage est mardi (variable binaire)</li>
+<li>Le mois de Septembre (variable binaire)</li>
+<li>Le jour du mois</li>
+</ul>
+</div>
+</div>
+<div id="statistiques-et-visualisations" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Statistiques et visualisations</h2>
+<div id="evolution-des-grilles-jouées" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Evolution des grilles jouées</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="application.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> DB<span class="sc">$</span>date_de_tirage, DB<span class="sc">$</span>nbGrillesJouees, <span class="at">main =</span> <span class="st">&quot;Evolution du nombre de grilles jouées&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Date de tirage&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;NB Grilles&quot;</span>)</span></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+Le nombre de grilles jouées dépend des périodes de l’années.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="application.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">xtabs</span>(nbGrillesJouees<span class="sc">~</span>Mois_fct, <span class="at">data =</span> DB), <span class="at">main =</span> <span class="st">&quot;Nombre de grilles jouées par mois&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Mois&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;#&quot;</span>)</span></code></pre></div>
+<p><img src="main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Il y a beaucoup de grilles jouées en septembre et en octobre. Nous allons inclure dans le modèle La variable septembre.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="application.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(nbGrillesJouees<span class="sc">~</span>Mardi, <span class="at">data =</span> DB)</span></code></pre></div>
+<pre><code>
+    Welch Two Sample t-test
+
+data:  nbGrillesJouees by Mardi
+t = 5.2249, df = 171.85, p-value = 4.999e-07
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 3976947 8806108
+sample estimates:
+mean in group 0 mean in group 1 
+       27337378        20945850 </code></pre>
+<p>Le test <code>t-test</code> de Welsh indique qu’il existe une différence significative entre les moyennes de grilles jouées mardi ou vendredi. Il y a plus de grilles qui sont jouées vendredi que mardi.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="modèle-de-comptage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimation-de-régression-de-poisson-avec-glm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
